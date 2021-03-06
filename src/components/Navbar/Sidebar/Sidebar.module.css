@@ -1,0 +1,24 @@
+a,
+a:visited {
+    text-decoration: none;
+}
+
+a:focus,
+a:active {
+    outline: none;
+}
+
+.nav {
+    padding-left: 20px;
+    grid-area: n;
+    background-color: burlywood;
+    height: 120vh;
+}
+
+.item a {
+    color: white;
+}
+
+.item .active {
+    color: gold;
+}
