@@ -9,7 +9,7 @@ import News from "./components/News/News";
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
-import {AppStateType} from "./components/Redux/State";
+import {AppStateType, updateNewPostText} from "./components/Redux/State";
 
 
 const App = (props: AppStateType) => {
@@ -20,7 +20,12 @@ const App = (props: AppStateType) => {
             <div className='app-wrapper-content'>
                 <Route path={'/Dialogs'}
                        render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
-                <Route path={'/Profile'} render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}/>
+                <Route path={'/Profile'}
+                       render={() => <Profile
+                           newPostText={props.state.profilePage}
+                           updateNewPostText={props.updateNewPostText}
+                           profilePage={props.state.profilePage}
+                           addPost={props.addPost}/>}/>
                 <Route path={'/Photos'} component={Photos}/>
                 <Route path={'/News'} component={News}/>
                 <Route path={'/Music'} component={Music}/>

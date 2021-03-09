@@ -1,6 +1,9 @@
-import {rerenderEntireTree} from "../../render";
+let rerenderEntireTree = (state: StateDataType) => {
+    console.log('state was changed')
+}
 
 export type AppStateType = {
+    updateNewPostText: (newText: string) => void
     state: StateDataType
     addPost: (postMessage: string) => void
 }
@@ -11,6 +14,7 @@ export type StateDataType = {
 }
 export type ProfilePageType = {
     posts: PostsDataType[]
+    newPostText: string
 
 }
 export type PostsDataType = {
@@ -44,6 +48,7 @@ export let state: StateDataType = {
             {id: 1, message: 'Hi, How are you?', count: 10},
             {id: 2, message: 'Good luck, in React)', count: 100},
         ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogs: [
@@ -82,9 +87,17 @@ export let state: StateDataType = {
 
 }
 export const addPost = (postMessage: string) => {
-    let newPost: PostsDataType = {id: 3, message: postMessage, count: 0}
+    let newPost: PostsDataType = {id: 3, message: state.profilePage.newPostText, count: 0}
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state);
 };
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+};
+export const subscribe = (observer: (state: StateDataType) => void) => {
+    rerenderEntireTree = observer; // pattern observer, по этому же паттерну работает addEventListener
+}
 
 export default state;
