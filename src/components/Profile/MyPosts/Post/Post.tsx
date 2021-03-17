@@ -16,8 +16,6 @@ const Post = (props: MessageType) => {
                 <span className={s.like}>Like {props.count}</span>
             </div>
         </div>
-
-
     )
 }
 

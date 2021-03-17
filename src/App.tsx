@@ -4,11 +4,11 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {Route} from 'react-router-dom';
 import News from "./components/News/News";
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
+import {Route} from 'react-router-dom';
 import {ActionsTypes, RootStateType} from "./components/Redux/State";
 
 type AppPropsType = {
@@ -23,7 +23,7 @@ const App = (props: AppPropsType) => {
             <Navbar sidebar={props.state.sideBar}/>
             <div className='app-wrapper-content'>
                 <Route path={'/Dialogs'}
-                       render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+                       render={() => <Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
                 <Route path={'/Profile'}
                        render={() => <Profile
                            newPostText={props.state.profilePage}
@@ -34,7 +34,6 @@ const App = (props: AppPropsType) => {
                 <Route path={'/Music'} component={Music}/>
                 <Route path={'/Settings'} component={Settings}/>
             </div>
-
         </div>
     );
 }

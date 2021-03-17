@@ -1,5 +1,7 @@
 const AddPost = 'ADD-POST';
 const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
+const UpdateNewMessageBody = 'UPDATE-NEW-MESSAGE-BODY'
+const SendMessage = 'SEND-MESSAGE'
 
 export type  RootStateType = {
     profilePage: ProfilePageType
@@ -19,6 +21,7 @@ export type PostsDataType = {
 export type DialogsPageType = {
     dialogs: dialogsDataType[]
     messages: Array<MessagesType>
+    newMessageBody: string
 }
 export type SideBarType = {
     friends: Array<FriendsType>
@@ -47,12 +50,17 @@ export type StoreType = {
 export type AddPostActionType = {
     type: 'ADD-POST'
 }
-
+export type SendMessageType = {
+    type: 'SEND-MESSAGE'
+}
 export type UpdateNewPostTextType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-
+export type UpdateNewMessageBodyType = {
+    type: 'UPDATE-NEW-MESSAGE-BODY'
+    body: string
+}
 
 let store: StoreType = {
     _state: {
@@ -78,13 +86,8 @@ let store: StoreType = {
                 {id: 3, message: "Yesterday was awesome!"},
                 {id: 4, message: "Good Morning!"},
                 {id: 5, message: "Chao!"},
-                {
-                    id: 6,
-                    message: "Aufwiedersehen! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut\\n' +\n" +
-                        "'debitis, reiciendis! Alias aperiam corporis ea impedit ipsam laudantium nihil perferendis\\n' +\n" +
-                        "'praesentium recusandae? Dignissimos enim ipsum, itaque maiores nam rerum ut."
-                }],
-
+                {id: 6, message: "Aufwiedersehen!"}],
+            newMessageBody: ''
         },
         sideBar: {
             friends: [
@@ -108,7 +111,7 @@ let store: StoreType = {
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer; // pattern observer, по этому же паттерну работает addEventListener
     },
-    dispatch(action: AddPostActionType | UpdateNewPostTextType) {
+    dispatch(action: AddPostActionType | UpdateNewPostTextType | UpdateNewMessageBodyType | SendMessageType) {
         if (action.type === AddPost) {
             let newPost: PostsDataType = {id: 3, message: this._state.profilePage.newPostText, count: 0}
             this._state.profilePage.posts.push(newPost)
@@ -117,18 +120,31 @@ let store: StoreType = {
         } else if (action.type === UpdateNewPostText) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
+        } else if (action.type === UpdateNewMessageBody) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber(this._state);
+        } else if (action.type === SendMessage) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({id: 6, message: body});
+            this._callSubscriber(this._state);
         }
     }
 }
 // автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*> и также добавляем as const
 // каждому объекту из ф-ии, чтобы объкты воспринимались как константа
 
-export  type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+export  type ActionsTypes = ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostTextActionCreator> |
+    ReturnType<typeof sendMessageAC> |
+    ReturnType<typeof updateNewMessageBodyAC>
 export const addPostActionCreator = () => ({type: AddPost} as const)
 export const updateNewPostTextActionCreator = (textInTextarea: string) => ({
     type: UpdateNewPostText,
     newText: textInTextarea
 } as const)
+export const sendMessageAC = () => ({type: SendMessage} as const)
+export const updateNewMessageBodyAC = (body: string) => ({type: UpdateNewMessageBody, body: body} as const)
 
 
 export default store;

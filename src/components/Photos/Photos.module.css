@@ -1,0 +1,25 @@
+.main {
+    text-align: center;
+}
+
+.wrapper__photos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    column-gap: 20px;
+}
+
+.wrapper__photos img {
+    border-radius: 5px;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.wrapper__photos img:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: 0.5s;
+}
