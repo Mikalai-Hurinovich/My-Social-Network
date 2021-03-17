@@ -1,12 +1,11 @@
-import {rerenderEntireTree} from "../../index";
-import {Dispatch} from "react";
+const AddPost = 'ADD-POST';
+const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
 
 export type  RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sideBar: SideBarType
 }
-
 export type ProfilePageType = {
     posts: PostsDataType[]
     newPostText: string
@@ -44,14 +43,16 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
     subscribe: (observer: (state: RootStateType) => void) => void
 }
+
 export type AddPostActionType = {
     type: 'ADD-POST'
 }
+
 export type UpdateNewPostTextType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export  type ActionsTypes = AddPostActionType | UpdateNewPostTextType
+
 
 let store: StoreType = {
     _state: {
@@ -108,17 +109,26 @@ let store: StoreType = {
         this._callSubscriber = observer; // pattern observer, по этому же паттерну работает addEventListener
     },
     dispatch(action: AddPostActionType | UpdateNewPostTextType) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === AddPost) {
             let newPost: PostsDataType = {id: 3, message: this._state.profilePage.newPostText, count: 0}
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UpdateNewPostText) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
     }
 }
+// автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*> и также добавляем as const
+// каждому объекту из ф-ии, чтобы объкты воспринимались как константа
+
+export  type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+export const addPostActionCreator = () => ({type: AddPost} as const)
+export const updateNewPostTextActionCreator = (textInTextarea: string) => ({
+    type: UpdateNewPostText,
+    newText: textInTextarea
+} as const)
 
 
 export default store;

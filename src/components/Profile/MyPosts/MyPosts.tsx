@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionsTypes} from "../../Redux/State";
+import {ActionsTypes, addPostActionCreator, updateNewPostTextActionCreator} from "../../Redux/State";
 
 type PropsType = {
     posts: postsDataType[]
@@ -13,17 +13,19 @@ type postsDataType = {
     message: string
     count: number
 }
+
+
 const MyPosts = (props: PropsType) => {
     let postElements = props.posts.map(p => <Post message={p.message} count={p.count}/>)
-
     let newPost: React.RefObject<HTMLTextAreaElement> = React.createRef()
+
     let addPostOnWall = () => {
-        props.dispatch({type: 'ADD-POST'})
+        props.dispatch(addPostActionCreator())
     }
     const onPostChange = (newText: ChangeEvent) => {
         if (newPost.current) {
             let textInTextarea = newPost.current.value;
-            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: textInTextarea})
+            props.dispatch(updateNewPostTextActionCreator(textInTextarea))
         }
     }
 
