@@ -4,7 +4,6 @@ import s from './Post.module.css';
 type MessageType = {
     message: string
     count: number
-
 }
 
 const Post = (props: MessageType) => {

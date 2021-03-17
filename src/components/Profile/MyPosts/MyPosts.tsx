@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {ActionsTypes} from "../../Redux/State";
 
 type PropsType = {
     posts: postsDataType[]
-    addPost: (postMessage: string) => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 type postsDataType = {
     id: number
@@ -18,14 +18,15 @@ const MyPosts = (props: PropsType) => {
 
     let newPost: React.RefObject<HTMLTextAreaElement> = React.createRef()
     let addPostOnWall = () => {
-        props.addPost(props.newPostText)
+        props.dispatch({type: 'ADD-POST'})
     }
-    const onPostChange = () => {
+    const onPostChange = (newText: ChangeEvent) => {
         if (newPost.current) {
             let textInTextarea = newPost.current.value;
-            props.updateNewPostText(textInTextarea)
+            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: textInTextarea})
         }
     }
+
     return (
         <div className={s.postsWrapper}>
             <h3>My posts</h3>

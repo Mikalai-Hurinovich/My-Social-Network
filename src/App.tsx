@@ -9,12 +9,11 @@ import News from "./components/News/News";
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
-import {RootStateType} from "./components/Redux/State";
+import {ActionsTypes, RootStateType} from "./components/Redux/State";
 
 type AppPropsType = {
     state: RootStateType
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -28,9 +27,8 @@ const App = (props: AppPropsType) => {
                 <Route path={'/Profile'}
                        render={() => <Profile
                            newPostText={props.state.profilePage}
-                           updateNewPostText={props.updateNewPostText}
                            profilePage={props.state.profilePage}
-                           addPost={props.addPost}/>}/>
+                           dispatch={props.dispatch}/>}/>
                 <Route path={'/Photos'} component={Photos}/>
                 <Route path={'/News'} component={News}/>
                 <Route path={'/Music'} component={Music}/>
