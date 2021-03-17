@@ -11,13 +11,13 @@ import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
 import {RootStateType} from "./components/Redux/State";
 
-type PropsType = {
+type AppPropsType = {
     state: RootStateType
     addPost: (postMessage: string) => void
     updateNewPostText: (newText: string) => void
 }
 
-const App = (props: PropsType) => {
+const App = (props: AppPropsType) => {
     return (
         <div className='app-wrapper'>
             <Header/>
