@@ -111,7 +111,7 @@ let store: StoreType = {
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer; // pattern observer, по этому же паттерну работает addEventListener
     },
-    dispatch(action: AddPostActionType | UpdateNewPostTextType | UpdateNewMessageBodyType | SendMessageType) {
+    dispatch(action: ActionsTypes) {
         if (action.type === AddPost) {
             let newPost: PostsDataType = {id: 3, message: this._state.profilePage.newPostText, count: 0}
             this._state.profilePage.posts.push(newPost)
