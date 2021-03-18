@@ -1,3 +1,7 @@
+import ProfileReducer from "./ProfileReducer";
+import DialogsReducer from "./DialogsReducer";
+import SideBarReducer from "./SideBarReducer";
+
 const AddPost = 'ADD-POST';
 const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
 const UpdateNewMessageBody = 'UPDATE-NEW-MESSAGE-BODY'
@@ -112,23 +116,10 @@ let store: StoreType = {
         this._callSubscriber = observer; // pattern observer, по этому же паттерну работает addEventListener
     },
     dispatch(action: ActionsTypes) {
-        if (action.type === AddPost) {
-            let newPost: PostsDataType = {id: 3, message: this._state.profilePage.newPostText, count: 0}
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state);
-        } else if (action.type === UpdateNewPostText) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UpdateNewMessageBody) {
-            this._state.dialogsPage.newMessageBody = action.body;
-            this._callSubscriber(this._state);
-        } else if (action.type === SendMessage) {
-            let body = this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = '';
-            this._state.dialogsPage.messages.push({id: 6, message: body});
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action);
+        this._state.sideBar = SideBarReducer(this._state.sideBar, action);
+        this._callSubscriber(this._state);
     }
 }
 // автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*> и также добавляем as const

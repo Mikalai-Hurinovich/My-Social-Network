@@ -9,7 +9,7 @@ import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
 import {Route} from 'react-router-dom';
-import {ActionsTypes, RootStateType} from "./components/Redux/State";
+import {ActionsTypes, RootStateType} from "./Redux/State";
 
 type AppPropsType = {
     state: RootStateType
