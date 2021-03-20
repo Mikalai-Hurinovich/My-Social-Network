@@ -88,7 +88,7 @@ let store: StoreType = {
                 {id: 1, message: "Hi"},
                 {id: 2, message: "See you!"},
                 {id: 3, message: "Yesterday was awesome!"},
-                {id: 4, message: "Good Morning!"},
+                {id: 4, message: "Give me your Money!!!!!"},
                 {id: 5, message: "Chao!"},
                 {id: 6, message: "Aufwiedersehen!"}],
             newMessageBody: ''
