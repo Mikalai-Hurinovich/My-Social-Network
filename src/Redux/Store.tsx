@@ -1,11 +1,11 @@
-import ProfileReducer from "./ProfileReducer";
-import DialogsReducer from "./DialogsReducer";
+import ProfileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./ProfileReducer";
+import DialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./DialogsReducer";
 import SideBarReducer from "./SideBarReducer";
 
-const AddPost = 'ADD-POST';
-const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
-const UpdateNewMessageBody = 'UPDATE-NEW-MESSAGE-BODY'
-const SendMessage = 'SEND-MESSAGE'
+export const AddPost = 'ADD-POST';
+export const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
+export const UpdateNewMessageBody = 'UPDATE-NEW-MESSAGE-BODY'
+export const SendMessage = 'SEND-MESSAGE'
 
 export type  RootStateType = {
     profilePage: ProfilePageType
@@ -125,17 +125,10 @@ let store: StoreType = {
 // автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*> и также добавляем as const
 // каждому объекту из ф-ии, чтобы объкты воспринимались как константа
 
-export  type ActionsTypes = ReturnType<typeof addPostActionCreator> |
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageAC> |
     ReturnType<typeof updateNewMessageBodyAC>
-export const addPostActionCreator = () => ({type: AddPost} as const)
-export const updateNewPostTextActionCreator = (textInTextarea: string) => ({
-    type: UpdateNewPostText,
-    newText: textInTextarea
-} as const)
-export const sendMessageAC = () => ({type: SendMessage} as const)
-export const updateNewMessageBodyAC = (body: string) => ({type: UpdateNewMessageBody, body: body} as const)
 
 
 export default store;
