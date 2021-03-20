@@ -16,7 +16,7 @@ type AppPropsType = {
     dispatch: (action: ActionsTypes) => void
     store: StoreType
 }
-
+//Test
 const App = (props: AppPropsType) => {
     return (
         <div className='app-wrapper'>
