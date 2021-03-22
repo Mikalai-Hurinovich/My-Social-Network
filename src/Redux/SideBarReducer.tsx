@@ -1,4 +1,4 @@
-import {ActionsTypes, SideBarType} from "./Store";
+import {SideBarType} from "./Store";
 
 let initialState = {
     friends: [
@@ -11,7 +11,8 @@ let initialState = {
         {id: 3, name: "Малыха", img: 'https://html5css.ru/howto/img_avatar2.png'},
     ]
 };
-const SideBarReducer = (state: SideBarType = initialState, action: ActionsTypes) => {
+export type SideBarActionsType = {}
+const SideBarReducer = (state: SideBarType = initialState, action: SideBarActionsType) => {
     return state;
 }
 

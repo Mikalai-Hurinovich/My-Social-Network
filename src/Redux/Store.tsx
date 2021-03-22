@@ -1,5 +1,5 @@
-import ProfileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./ProfileReducer";
-import DialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./DialogsReducer";
+import ProfileReducer, {ProfileActionsTypes} from "./ProfileReducer";
+import DialogsReducer, {DialogsActionsTypes} from "./DialogsReducer";
 import SideBarReducer from "./SideBarReducer";
 
 export const AddPost = 'ADD-POST';
@@ -8,9 +8,9 @@ export const UpdateNewMessageBody = 'UPDATE-NEW-MESSAGE-BODY'
 export const SendMessage = 'SEND-MESSAGE'
 
 export type  RootStateType = {
+    sideBar: SideBarType;
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-    sideBar: SideBarType
 }
 export type ProfilePageType = {
     posts: PostsDataType[]
@@ -49,21 +49,6 @@ export type StoreType = {
     _callSubscriber: (state: RootStateType) => void
     dispatch: (action: ActionsTypes) => void
     subscribe: (observer: (state: RootStateType) => void) => void
-}
-
-export type AddPostActionType = {
-    type: 'ADD-POST'
-}
-export type SendMessageType = {
-    type: 'SEND-MESSAGE'
-}
-export type UpdateNewPostTextType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-export type UpdateNewMessageBodyType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY'
-    body: string
 }
 
 let store: StoreType = {
@@ -125,10 +110,7 @@ let store: StoreType = {
 // автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*> и также добавляем as const
 // каждому объекту из ф-ии, чтобы объкты воспринимались как константа
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof sendMessageAC> |
-    ReturnType<typeof updateNewMessageBodyAC>
+export type ActionsTypes = DialogsActionsTypes & ProfileActionsTypes
 
 
 export default store;

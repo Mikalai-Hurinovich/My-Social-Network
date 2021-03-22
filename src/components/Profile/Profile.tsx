@@ -7,14 +7,11 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 type PropsType = {
     store: StoreType
 }
-const Profile = (props: PropsType) => {
+const Profile = (/*props: PropsType*/) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer
-                store={props.store}
-            />
-
+            <MyPostsContainer/>
         </div>
     )
 }

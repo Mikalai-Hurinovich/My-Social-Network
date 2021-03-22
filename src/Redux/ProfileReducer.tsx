@@ -1,4 +1,4 @@
-import {ActionsTypes, AddPost, PostsDataType, ProfilePageType, UpdateNewPostText} from "./Store";
+import {PostsDataType, ProfilePageType} from "./Store";
 
 let initialState = {
     posts: [
@@ -7,23 +7,40 @@ let initialState = {
     ],
     newPostText: ''
 }
-const ProfileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+export type AddPostActionType = {
+    type: 'ADD-POST'
+}
+export type UpdateNewPostTextType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+export type ProfileActionsTypes = UpdateNewPostTextType | AddPostActionType
+
+const ProfileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes): ProfilePageType => {
+    let copyState = {...state}
     switch (action.type) {
-        case AddPost:
+        case 'ADD-POST':
             let newPost: PostsDataType = {id: 3, message: state.newPostText, count: 0}
-            state.posts.push(newPost)
-            state.newPostText = ''
-            return state;
-        case UpdateNewPostText:
-            state.newPostText = action.newText;
-            return state;
+            copyState.posts.push(newPost)
+            copyState.newPostText = ''
+            return copyState;
+        case 'UPDATE-NEW-POST-TEXT':
+            copyState.newPostText = action.newText;
+            return copyState;
         default:
-            return state;
+            return copyState;
     }
 }
-export const addPostActionCreator = () => ({type: AddPost} as const)
-export const updateNewPostTextActionCreator = (textInTextarea: string) => ({
-    type: UpdateNewPostText,
+export type addPostActionType = {
+    type: 'ADD-POST'
+}
+export const addPostActionCreator = (): addPostActionType => ({type: 'ADD-POST'})
+export type updateNewPostTextAC = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+}
+export const updateNewPostTextAC = (textInTextarea: string): updateNewPostTextAC => ({
+    type: 'UPDATE-NEW-POST-TEXT',
     newText: textInTextarea
-} as const)
+})
 export default ProfileReducer;

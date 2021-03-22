@@ -11,6 +11,8 @@ let reducers = combineReducers({
     sideBar: SideBarReducer
 });
 
+export type ReduxRootState = ReturnType<typeof reducers>
+
 let store = createStore(reducers);
 
 export default store;
