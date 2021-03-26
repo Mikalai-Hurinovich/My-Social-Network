@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './Photos.module.css'
+import {Typography} from "@material-ui/core";
 
 const Photos = () => {
     return (
-        <div className={s.main}>
+        <Typography variant={"h5"} className={s.main}>
             Photo Gallery
             <div className={s.wrapper__photos}>
                 <img
@@ -32,7 +33,7 @@ const Photos = () => {
                     src="http://webneel.com/wallpaper/sites/default/files/images/08-2018/3-nature-wallpaper-mountain.jpg"
                     alt=""/>
             </div>
-        </div>
+        </Typography>
     )
 }
 

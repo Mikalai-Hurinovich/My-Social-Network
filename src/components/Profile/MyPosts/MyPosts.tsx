@@ -17,7 +17,7 @@ type postsDataType = {
 
 
 const MyPosts = (props: PropsType) => {
-    let postElements = props.posts.map(p => <Post message={p.message} count={p.count}/>)
+    let postElements = props.posts.map(p => <Post key={p.id} message={p.message} count={p.count}/>)
     let newPost: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     let onAddPost = () => {

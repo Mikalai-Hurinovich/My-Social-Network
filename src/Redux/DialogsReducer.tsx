@@ -10,9 +10,9 @@ let initialState = {
         {id: 6, name: "Артур"},
     ],
     messages: [
-        {id: 1, message: "Hi"},
-        {id: 2, message: "See you!"},
-        {id: 3, message: "Yesterday was awesome!"},
+        {id: 1, message: "Frontend?"},
+        {id: 2, message: "Let's go to Baikal!!!!"},
+        {id: 3, message: "Stop sitting at the computer, I want to go on vacation !!1"},
         {id: 4, message: "Good Morning!"},
         {id: 5, message: "Chao!"},
         {id: 6, message: "Aufwiedersehen!"}],
@@ -23,16 +23,17 @@ export type DialogsActionsTypes = SendMessageActionType | UpdateNewMessageBodyAc
 
 
 const DialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsTypes): DialogsPageType => {
-    const stateCopy = JSON.parse(JSON.stringify(state));
+    let stateCopy = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-        case 'UPDATE-NEW-MESSAGE-BODY': {
+        case 'UPDATE-NEW-MESSAGE-BODY':
             return {...stateCopy, newMessageBody: action.body};
-        }
         case 'SEND-MESSAGE':
             let body = stateCopy.newMessageBody;
-            stateCopy.newMessageBody = '';
-            stateCopy.messages.push({id: 6, message: body});
-            return stateCopy;
+            return stateCopy = {
+                ...stateCopy,
+                newMessageBody: '',
+                messages: [...stateCopy.messages, {id: 6, message: body}] // вместо метода push использ. spread
+            }
         default:
             return stateCopy;
     }

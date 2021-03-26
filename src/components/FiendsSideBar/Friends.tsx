@@ -8,7 +8,10 @@ type FriendsPropsType = {
 
 export function Friends(props: FriendsPropsType) {
     let friendsElements = props.friends.map(friend =>
-        <div><img src={friend.img} alt="FriendImg"/>{friend.name}</div>
+        <div key={friend.id}>
+            <img src={friend.img} alt="FriendImg"/>
+            {friend.name}
+        </div>
     )
     return (
         <div>

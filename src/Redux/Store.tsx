@@ -70,9 +70,9 @@ let store: StoreType = {
                 {id: 6, name: "Артур"},
             ],
             messages: [
-                {id: 1, message: "Hi"},
-                {id: 2, message: "See you!"},
-                {id: 3, message: "Yesterday was awesome!"},
+                {id: 1, message: "Frontend?"},
+                {id: 2, message: "Let's go to baikal !!!!"},
+                {id: 3, message: "Stop sitting at the computer, I want to go on vacation !!1"},
                 {id: 4, message: "Give me your Money!!!!!"},
                 {id: 5, message: "Chao!"},
                 {id: 6, message: "Aufwiedersehen!"}],

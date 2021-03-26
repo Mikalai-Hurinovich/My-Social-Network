@@ -13,18 +13,16 @@ type PropsType = {
 }
 const Dialogs = (props: PropsType) => {
     let state = props.dialogsPage;
-    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messageElements = state.messages.map(m => <Message message={m.message}/>)
+    let dialogsElements = state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messageElements = state.messages.map(m => <Message key={m.id} message={m.message}/>)
     let newMessageBody = state.newMessageBody;
     let onSendMessageClick = () => {
         props.sendMessage();
-        // props.dispatch(sendMessageAC())
     }
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value;
         props.updateNewMessageBody(body);
-        // props.dispatch(updateNewMessageBodyAC(body))
     }
 
     return (
