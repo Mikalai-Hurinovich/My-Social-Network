@@ -8,7 +8,8 @@ import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
 import {Route} from 'react-router-dom';
-import store, {ActionsTypes, StoreType} from "./Redux/Store";
+import store from './Redux/Redux-store'
+import  {ActionsTypes, StoreType} from "./Redux/Store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
@@ -20,7 +21,7 @@ const App = (/*props: AppPropsType*/) => {
     return (
         <div className='app-wrapper'>
             <Header/>
-            <Navbar sidebar={store._state.sideBar}/>
+            <Navbar sidebar={store.getState().sideBar}/>
             <div className='app-wrapper-content'>
                 <Route path={'/Dialogs'}
                        render={() => <DialogsContainer/>}/>

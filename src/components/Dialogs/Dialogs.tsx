@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPageType} from "../../Redux/Store";
+import {Button, TextareaAutosize} from '@material-ui/core'
 
 
 type PropsType = {
@@ -34,11 +35,14 @@ const Dialogs = (props: PropsType) => {
             </div>
             <div className={s.messages}>
                 <div>{messageElements}</div>
-                <div><textarea value={newMessageBody}
-                               onChange={onNewMessageChange}
-                               placeholder='Enter Your Message...'/></div>
+                <div><TextareaAutosize
+                    rowsMin={2}
+                    value={newMessageBody}
+                    onChange={onNewMessageChange}
+                    placeholder='Enter Your Message...'/></div>
                 <div>
-                    <button onClick={onSendMessageClick}>Send</button>
+                    <Button color={'primary'} variant={"contained"} size={'small'}
+                            onClick={onSendMessageClick}>Send</Button>
                 </div>
             </div>
         </div>

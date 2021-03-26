@@ -2,10 +2,10 @@ import ProfileReducer, {ProfileActionsTypes} from "./ProfileReducer";
 import DialogsReducer, {DialogsActionsTypes} from "./DialogsReducer";
 import SideBarReducer from "./SideBarReducer";
 
-export const AddPost = 'ADD-POST';
-export const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
-export const UpdateNewMessageBody = 'UPDATE-NEW-MESSAGE-BODY'
-export const SendMessage = 'SEND-MESSAGE'
+// export const AddPost = 'ADD-POST';
+// export const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
+// export const UpdateNewMessageBody = 'UPDATE-NEW-MESSAGE-BODY'
+// export const SendMessage = 'SEND-MESSAGE'
 
 export type  RootStateType = {
     sideBar: SideBarType;

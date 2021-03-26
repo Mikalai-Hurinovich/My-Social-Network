@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {Button, TextareaAutosize, Typography} from "@material-ui/core";
 
 type PropsType = {
     updateNewPostText: (newText: string) => void
@@ -32,14 +33,15 @@ const MyPosts = (props: PropsType) => {
 
     return (
         <div className={s.postsWrapper}>
-            <h3>My posts</h3>
+            <Typography variant={'h4'}>My posts</Typography>
             <div className={s.item}>
                 <div>
-                    <textarea onChange={onPostChange} ref={newPost} value={props.newPostText}/>
+                    <TextareaAutosize placeholder={'Your post message...'} rowsMin={2} onChange={onPostChange}
+                                      ref={newPost} value={props.newPostText}/>
                 </div>
                 <br/>
                 <div>
-                    <button onClick={onAddPost}>Add Post</button>
+                    <Button size={'small'} color={'primary'} variant={"contained"} onClick={onAddPost}>Add Post</Button>
                 </div>
             </div>
             <div className={s.posts}>

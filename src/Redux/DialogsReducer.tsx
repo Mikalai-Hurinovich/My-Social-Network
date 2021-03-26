@@ -22,19 +22,19 @@ let initialState = {
 export type DialogsActionsTypes = SendMessageActionType | UpdateNewMessageBodyActionType
 
 
-const DialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsTypes): DialogsPageType  => {
-    let copyState = {...state};
+const DialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsTypes): DialogsPageType => {
+    const stateCopy = JSON.parse(JSON.stringify(state));
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY': {
-            return {...state, newMessageBody: action.body};
+            return {...stateCopy, newMessageBody: action.body};
         }
         case 'SEND-MESSAGE':
-            let body = copyState.newMessageBody;
-            copyState.newMessageBody = '';
-            copyState.messages.push({id: 6, message: body});
-            return copyState;
+            let body = stateCopy.newMessageBody;
+            stateCopy.newMessageBody = '';
+            stateCopy.messages.push({id: 6, message: body});
+            return stateCopy;
         default:
-            return copyState;
+            return stateCopy;
     }
 }
 
@@ -48,5 +48,8 @@ export type UpdateNewMessageBodyActionType = {
     body: string
 }
 
-export const updateNewMessageBodyAC = (body: string): UpdateNewMessageBodyActionType => ({type: 'UPDATE-NEW-MESSAGE-BODY', body: body})
+export const updateNewMessageBodyAC = (body: string): UpdateNewMessageBodyActionType => ({
+    type: 'UPDATE-NEW-MESSAGE-BODY',
+    body: body
+})
 export default DialogsReducer;

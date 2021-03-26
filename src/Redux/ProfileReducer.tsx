@@ -17,18 +17,18 @@ export type UpdateNewPostTextType = {
 export type ProfileActionsTypes = UpdateNewPostTextType | AddPostActionType
 
 const ProfileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes): ProfilePageType => {
-    let copyState = {...state}
+    const stateCopy = JSON.parse(JSON.stringify(state))
     switch (action.type) {
         case 'ADD-POST':
             let newPost: PostsDataType = {id: 3, message: state.newPostText, count: 0}
-            copyState.posts.push(newPost)
-            copyState.newPostText = ''
-            return copyState;
+            stateCopy.posts.push(newPost)
+            stateCopy.newPostText = ''
+            return stateCopy;
         case 'UPDATE-NEW-POST-TEXT':
-            copyState.newPostText = action.newText;
-            return copyState;
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
         default:
-            return copyState;
+            return stateCopy;
     }
 }
 export type addPostActionType = {
