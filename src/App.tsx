@@ -9,8 +9,11 @@ import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
 import {Route} from 'react-router-dom';
 import store from './Redux/Redux-store'
-import  {ActionsTypes, StoreType} from "./Redux/Store";
+import {ActionsTypes, StoreType} from "./Redux/Store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users";
+import {Switch} from "react-router-dom";
+import Error404 from "./components/ErrorPage/Error404";
 
 type AppPropsType = {
     dispatch: (action: ActionsTypes) => void
@@ -18,19 +21,25 @@ type AppPropsType = {
 }
 
 const App = (/*props: AppPropsType*/) => {
+
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar sidebar={store.getState().sideBar}/>
             <div className='app-wrapper-content'>
-                <Route path={'/Dialogs'}
-                       render={() => <DialogsContainer/>}/>
-                <Route path={'/Profile'}
-                       render={() => <Profile/>}/>
-                <Route path={'/Photos'} component={Photos}/>
-                <Route path={'/News'} component={News}/>
-                <Route path={'/Music'} component={Music}/>
-                <Route path={'/Settings'} component={Settings}/>
+                <Switch>
+                    <Route exact path={'/'}/>
+                    <Route path={'/Profile'}
+                           render={() => <Profile/>}/>
+                    <Route path={'/Dialogs'}
+                           render={() => <DialogsContainer/>}/>
+                    <Route path={'/Users'} render={() => <Users/>}/>
+                    <Route path={'/Photos'} component={Photos}/>
+                    <Route path={'/News'} component={News}/>
+                    <Route path={'/Music'} component={Music}/>
+                    <Route path={'/Settings'} component={Settings}/>
+                    <Route render={() => <Error404/>}/>
+                </Switch>
             </div>
         </div>
     );

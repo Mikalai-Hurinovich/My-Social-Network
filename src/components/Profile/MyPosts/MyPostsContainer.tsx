@@ -38,7 +38,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         updateNewPostText: (newText: string) => {
             dispatch(updateNewPostTextAC(newText))
         }
-    }
+    }        
 }
 
 const MyPostsContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, mapDispatchToProps)(MyPosts);
