@@ -10,57 +10,64 @@ export type UsersType = {
 }
 export type UserType = {
     id: number
+    urlPhoto: string
     followed: boolean
     fullName: string
-    status: string
+    message: string
     location: LocationType
 }
 export type LocationType = {
     city: string
     country: string
 }
-let initialState: UsersType = {
+export let initialState: UsersType = {
     users: [
         {
             id: 1,
+            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
             followed: false,
             fullName: "Микола",
-            status: 'Hello, IT!',
+            message: 'Hello, IT!',
             location: {city: 'Minsk', country: 'Belarus'}
         },
         {
             id: 2,
+            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
             followed: false,
             fullName: "Дима",
-            status: 'Hello, Travel!',
+            message: 'Hello, Travel!',
             location: {city: 'Minsk', country: 'Belarus'}
         },
         {
             id: 3,
+            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
             followed: true,
             fullName: "Малыха",
-            status: 'Hello, Life!',
+            message: 'Hello, Life!',
             location: {city: 'Minsk', country: 'Belarus'}
         },
         {
             id: 4,
+            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
             followed: false,
             fullName: "Арчибальд",
-            status: 'Hello, Phila!',
+            message: 'Hello, Phila!',
             location: {city: 'Philadelphia', country: 'USA'}
         },
         {
             id: 5,
+            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
             followed: true,
             fullName: "Витя",
-            status: 'Hello, Chicago!',
+            message: 'Hello, Chicago!',
             location: {city: 'Chicago', country: 'USA'}
         },
         {
             id: 6,
+            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
             followed: false,
             fullName: "Артур",
-            status: 'Hello, Boston!',
+            message: 'Hello, Boston!',
             location: {city: 'Boston', country: 'USA'}
         },
     ]
