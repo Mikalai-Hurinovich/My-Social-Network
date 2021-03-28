@@ -7,13 +7,13 @@ import News from "./components/News/News";
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import store from './Redux/Redux-store'
 import {ActionsTypes, StoreType} from "./Redux/Store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import Users from "./components/Users";
-import {Switch} from "react-router-dom";
 import Error404 from "./components/ErrorPage/Error404";
+import UsersContainer from "./components/Users/UsersContainer";
+
 
 type AppPropsType = {
     dispatch: (action: ActionsTypes) => void
@@ -33,7 +33,7 @@ const App = (/*props: AppPropsType*/) => {
                            render={() => <Profile/>}/>
                     <Route path={'/Dialogs'}
                            render={() => <DialogsContainer/>}/>
-                    <Route path={'/Users'} render={() => <Users/>}/>
+                    <Route path={'/Users'} render={() => <UsersContainer/>}/>
                     <Route path={'/Photos'} component={Photos}/>
                     <Route path={'/News'} component={News}/>
                     <Route path={'/Music'} component={Music}/>
