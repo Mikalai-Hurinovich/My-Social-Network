@@ -10,11 +10,15 @@ export type UsersType = {
 }
 export type UserType = {
     id: number
-    urlPhoto: string
+    photos: PhotosType
     followed: boolean
-    fullName: string
+    name: string
     message: string
     location: LocationType
+}
+export type PhotosType = {
+    small: string
+    large: string
 }
 export type LocationType = {
     city: string
@@ -22,54 +26,54 @@ export type LocationType = {
 }
 export let initialState: UsersType = {
     users: [
-        {
-            id: 1,
-            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-            followed: false,
-            fullName: "Микола",
-            message: 'Hello, IT!',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-            followed: false,
-            fullName: "Дима",
-            message: 'Hello, Travel!',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 3,
-            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-            followed: true,
-            fullName: "Малыха",
-            message: 'Hello, Life!',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 4,
-            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-            followed: false,
-            fullName: "Арчибальд",
-            message: 'Hello, Phila!',
-            location: {city: 'Philadelphia', country: 'USA'}
-        },
-        {
-            id: 5,
-            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-            followed: true,
-            fullName: "Витя",
-            message: 'Hello, Chicago!',
-            location: {city: 'Chicago', country: 'USA'}
-        },
-        {
-            id: 6,
-            urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-            followed: false,
-            fullName: "Артур",
-            message: 'Hello, Boston!',
-            location: {city: 'Boston', country: 'USA'}
-        },
+        //     {
+        //         id: 1,
+        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
+        //         followed: false,
+        //         fullName: "Микола",
+        //         message: 'Hello, IT!',
+        //         location: {city: 'Minsk', country: 'Belarus'}
+        //     },
+        //     {
+        //         id: 2,
+        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
+        //         followed: false,
+        //         fullName: "Дима",
+        //         message: 'Hello, Travel!',
+        //         location: {city: 'Minsk', country: 'Belarus'}
+        //     },
+        //     {
+        //         id: 3,
+        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
+        //         followed: true,
+        //         fullName: "Малыха",
+        //         message: 'Hello, Life!',
+        //         location: {city: 'Minsk', country: 'Belarus'}
+        //     },
+        //     {
+        //         id: 4,
+        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
+        //         followed: false,
+        //         fullName: "Арчибальд",
+        //         message: 'Hello, Phila!',
+        //         location: {city: 'Philadelphia', country: 'USA'}
+        //     },
+        //     {
+        //         id: 5,
+        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
+        //         followed: true,
+        //         fullName: "Витя",
+        //         message: 'Hello, Chicago!',
+        //         location: {city: 'Chicago', country: 'USA'}
+        //     },
+        //     {
+        //         id: 6,
+        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
+        //         followed: false,
+        //         fullName: "Артур",
+        //         message: 'Hello, Boston!',
+        //         location: {city: 'Boston', country: 'USA'}
+        //     },
     ]
 }
 type followACType = { type: typeof FOLLOW, userID: number }

@@ -2,69 +2,28 @@ import React from 'react';
 import {MapDispatchToPropsType, MapStateToPropsType} from "./Users/UsersContainer";
 import s from './Users/Styles.module.css'
 import {Button} from "@material-ui/core";
+import axios from "axios";
+import anonim from './../assets/images/anonim.jpg'
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 let Users = (props: PropsType) => {
 
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-                followed: false,
-                fullName: "Микола",
-                message: 'Hello, IT!',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: 2,
-                urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-                followed: false,
-                fullName: "Дима",
-                message: 'Hello, Travel!',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: 3,
-                urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-                followed: true,
-                fullName: "Малыха",
-                message: 'Hello, Life!',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: 4,
-                urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-                followed: false,
-                fullName: "Арчибальд",
-                message: 'Hello, Phila!',
-                location: {city: 'Philadelphia', country: 'USA'}
-            },
-            {
-                id: 5,
-                urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-                followed: true,
-                fullName: "Витя",
-                message: 'Hello, Chicago!',
-                location: {city: 'Chicago', country: 'USA'}
-            },
-            {
-                id: 6,
-                urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-                followed: false,
-                fullName: "Артур",
-                message: 'Hello, Boston!',
-                location: {city: 'Boston', country: 'USA'}
-            },
-        ])
+        axios
+            .get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                props.setUsers(response.data.items)
+            })
+
     }
+
     return (
         <div className={s.wrapper}>
             {props.users.map(u => <div key={u.id}>
                 <div className={s.main}>
 
                     <div className={s.user}>
-                        <img className={s.userPhoto} src={u.urlPhoto} alt=""/>
+                        <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : anonim} alt=""/>
                         {u.followed ?
                             <Button size={'small'} color={'primary'} variant={"contained"} onClick={() => {
                                 props.unfollow(u.id)
@@ -74,10 +33,10 @@ let Users = (props: PropsType) => {
                             }}>Follow</Button>}
                     </div>
                     <div className={s.userInfo}>
-                        <span>{u.fullName}</span>
+                        <span>{u.name}</span>
                         <span>{u.message}</span>
                     </div>
-                    <div className={s.userLocation}>{u.location.country}, {u.location.city}</div>
+                    <div className={s.userLocation}>{'u.location.country'}, {'u.location.city'}</div>
                 </div>
             </div>)}
         </div>
