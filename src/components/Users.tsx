@@ -14,7 +14,6 @@ let Users = (props: PropsType) => {
             .then(response => {
                 props.setUsers(response.data.items)
             })
-
     }
 
     return (
