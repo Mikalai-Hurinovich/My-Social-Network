@@ -8,28 +8,23 @@ import anonim from './../assets/images/anonim.jpg'
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersClassComponent extends React.Component<PropsType> {
-constructor(props: PropsType) {
-    super(props);
-    if (this.props.users.length === 0) {
-        axios
-            .get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
+    componentDidMount() {
+        if (this.props.users.length === 0) {
+            axios
+                .get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    this.props.setUsers(response.data.items)
+                })
+        }
     }
-}
-    getUsers = () => {
 
-    }
 
     render() {
         return (
             <>
-                <button onClick={this.getUsers}>GetUsers</button>
                 <div className={s.wrapper}>
                     {this.props.users.map(u => <div key={u.id}>
                         <div className={s.main}>
-
                             <div className={s.user}>
                                 <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : anonim}
                                      alt=""/>

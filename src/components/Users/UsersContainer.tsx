@@ -47,5 +47,6 @@ function mapDispatchToProps(dispatch: Dispatch) {
 }
 
 // Создает контейнерную компоненту
-const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, mapDispatchToProps)(Users);
+const UsersContainer =
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, mapDispatchToProps)(Users);
 export default UsersContainer;
