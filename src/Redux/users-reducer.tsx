@@ -3,10 +3,16 @@ import React from "react";
 const SET_USERS = 'SET-USERS';
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 
 export type UsersType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+
 }
 export type UserType = {
     id: number
@@ -25,61 +31,17 @@ export type LocationType = {
     country: string
 }
 export let initialState: UsersType = {
-    users: [
-        //     {
-        //         id: 1,
-        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-        //         followed: false,
-        //         fullName: "Микола",
-        //         message: 'Hello, IT!',
-        //         location: {city: 'Minsk', country: 'Belarus'}
-        //     },
-        //     {
-        //         id: 2,
-        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-        //         followed: false,
-        //         fullName: "Дима",
-        //         message: 'Hello, Travel!',
-        //         location: {city: 'Minsk', country: 'Belarus'}
-        //     },
-        //     {
-        //         id: 3,
-        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-        //         followed: true,
-        //         fullName: "Малыха",
-        //         message: 'Hello, Life!',
-        //         location: {city: 'Minsk', country: 'Belarus'}
-        //     },
-        //     {
-        //         id: 4,
-        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-        //         followed: false,
-        //         fullName: "Арчибальд",
-        //         message: 'Hello, Phila!',
-        //         location: {city: 'Philadelphia', country: 'USA'}
-        //     },
-        //     {
-        //         id: 5,
-        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-        //         followed: true,
-        //         fullName: "Витя",
-        //         message: 'Hello, Chicago!',
-        //         location: {city: 'Chicago', country: 'USA'}
-        //     },
-        //     {
-        //         id: 6,
-        //         urlPhoto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHxYuEUMLCpgb1UdOMPAVxkCnoLndbSrGtVA&usqp=CAU',
-        //         followed: false,
-        //         fullName: "Артур",
-        //         message: 'Hello, Boston!',
-        //         location: {city: 'Boston', country: 'USA'}
-        //     },
-    ]
+    users: [],
+    pageSize: 6,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 type followACType = { type: typeof FOLLOW, userID: number }
 type unfollowACType = { type: typeof UNFOLLOW, userID: number }
 type setUsersACType = { type: typeof SET_USERS, users: UserType[] }
-type ActionType = followACType | unfollowACType | setUsersACType
+type setCurrentPage = { type: typeof SET_CURRENT_PAGE, currentPage: number }
+type setUsersTotalCount = { type: typeof SET_TOTAL_USERS_COUNT, totalCount: number }
+type ActionType = followACType | unfollowACType | setUsersACType | setCurrentPage | setUsersTotalCount
 const UsersReducer = (state: UsersType = initialState, action: ActionType): UsersType => {
     switch (action.type) {
         case FOLLOW:
@@ -101,7 +63,13 @@ const UsersReducer = (state: UsersType = initialState, action: ActionType): User
                 })
             }
         case SET_USERS: {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.totalCount}
         }
         default:
             return state;
@@ -113,4 +81,8 @@ const UsersReducer = (state: UsersType = initialState, action: ActionType): User
 export const followAC = (userID: number) => ({type: FOLLOW, userID});
 export const unfollowAC = (userID: number) => ({type: UNFOLLOW, userID});
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users})
+export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage})
+
+export const setUsersTotalCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalCount})
+
 export default UsersReducer;

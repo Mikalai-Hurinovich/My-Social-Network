@@ -40,4 +40,10 @@
 
 .selectedPage {
     font-weight: bold;
+    margin-right: 5px;
+
+}
+.page{
+    margin-right: 5px;
+    cursor: pointer;
 }
