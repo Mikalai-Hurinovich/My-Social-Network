@@ -6,7 +6,7 @@ import axios from "axios";
 import anonymous from "../assets/images/anonymous.jpg";
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
-let Users = (props: PropsType) => {
+let UsersApiComponent = (props: PropsType) => {
 
     if (props.users.length === 0) {
         axios
@@ -48,4 +48,4 @@ let Users = (props: PropsType) => {
         </div>
     )
 }
-export default Users;
+export default UsersApiComponent;

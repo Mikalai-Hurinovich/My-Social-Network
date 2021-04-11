@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import Users from "../Users";
 import {ReduxRootState} from "../../Redux/Redux-store";
 import {Dispatch} from "redux";
 import {
@@ -11,7 +10,47 @@ import {
     unfollowAC,
     UserType
 } from "../../Redux/users-reducer";
-import UsersClassComponent from "../UsersClassComponent";
+
+import axios from "axios";
+import Users from "./Users";
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+export class UsersApiClassComponent extends React.Component<PropsType> {
+    componentDidMount() {
+        if (this.props.users.length === 0) {
+            axios
+                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+                .then(response => {
+                    this.props.setUsers(response.data.items)
+                    this.props.setTotalUsersCount(response.data.totalCount)
+                })
+        }
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber);
+
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+    }
+    render() {
+        return <Users totalUsersCount={this.props.totalUsersCount}
+                      pageSize={this.props.pageSize}
+                      onPageChanged={this.onPageChanged}
+                      currentPage={this.props.currentPage}
+                      users={this.props.users}
+                      follow={this.props.follow}
+                      unfollow={this.props.unfollow}
+                      setCurrentPage={this.props.setCurrentPage}
+                      setTotalUsersCount={this.props.setTotalUsersCount}
+                      setUsers={this.props.setUsers}
+        />
+    }
+}
 
 export type MapStateToPropsType = {
     users: UserType[]
@@ -41,7 +80,7 @@ export function mapStateToProps(state: ReduxRootState) {
     }
 }
 
-// mapDispatchToProps передает дочерней компоненте (Users) через пропсы callbacks
+// mapDispatchToProps передает дочерней компоненте (UsersApiComponent) через пропсы callbacks
 function mapDispatchToProps(dispatch: Dispatch) {
     return {
         follow: (userID: number) => {
@@ -68,5 +107,5 @@ function mapDispatchToProps(dispatch: Dispatch) {
 
 // Создает контейнерную компоненту
 const UsersContainer =
-    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, mapDispatchToProps)(UsersClassComponent);
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, mapDispatchToProps)(UsersApiClassComponent);
 export default UsersContainer;

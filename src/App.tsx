@@ -9,18 +9,11 @@ import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
 import {Route, Switch} from 'react-router-dom';
 import store from './Redux/Redux-store'
-import {ActionsTypes, StoreType} from "./Redux/Store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Error404 from "./components/ErrorPage/Error404";
 import UsersContainer from "./components/Users/UsersContainer";
 
-
-type AppPropsType = {
-    dispatch: (action: ActionsTypes) => void
-    store: StoreType
-}
-
-const App = (/*props: AppPropsType*/) => {
+const App = () => {
 
     return (
         <div className='app-wrapper'>
@@ -33,7 +26,7 @@ const App = (/*props: AppPropsType*/) => {
                            render={() => <Profile/>}/>
                     <Route path={'/Dialogs'}
                            render={() => <DialogsContainer/>}/>
-                    <Route path={'/Users'} render={() => <UsersContainer/>}/>
+                    <Route path={'/UsersApiComponent'} render={() => <UsersContainer/>}/>
                     <Route path={'/Photos'} component={Photos}/>
                     <Route path={'/News'} component={News}/>
                     <Route path={'/Music'} component={Music}/>
