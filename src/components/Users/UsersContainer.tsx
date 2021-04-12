@@ -6,11 +6,11 @@ import {
     followAC,
     setCurrentPageAC,
     setUsersAC,
-    setUsersTotalCountAC,
+    setUsersTotalCountAC, toggleIsFetchingAC,
     unfollowAC,
     UserType
 } from "../../Redux/users-reducer";
-
+import packman from "../../assets/images/packman.svg";
 import axios from "axios";
 import Users from "./Users";
 
@@ -18,10 +18,12 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export class UsersApiClassComponent extends React.Component<PropsType> {
     componentDidMount() {
+        this.props.toggleIsFetching(true)
         if (this.props.users.length === 0) {
             axios
                 .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
                 .then(response => {
+                    this.props.toggleIsFetching(false)
                     this.props.setUsers(response.data.items)
                     this.props.setTotalUsersCount(response.data.totalCount)
                 })
@@ -30,25 +32,31 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
-
+        this.props.toggleIsFetching(true)
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
             })
     }
+
     render() {
-        return <Users totalUsersCount={this.props.totalUsersCount}
-                      pageSize={this.props.pageSize}
-                      onPageChanged={this.onPageChanged}
-                      currentPage={this.props.currentPage}
-                      users={this.props.users}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}
-                      setCurrentPage={this.props.setCurrentPage}
-                      setTotalUsersCount={this.props.setTotalUsersCount}
-                      setUsers={this.props.setUsers}
-        />
+        return <>
+            {this.props.isFetching ? <div><img src={packman}/></div> : null}
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize}
+                   onPageChanged={this.onPageChanged}
+                   currentPage={this.props.currentPage}
+                   users={this.props.users}
+                   follow={this.props.follow}
+                   unfollow={this.props.unfollow}
+                   setCurrentPage={this.props.setCurrentPage}
+                   setTotalUsersCount={this.props.setTotalUsersCount}
+                   setUsers={this.props.setUsers}
+
+            />
+        </>
     }
 }
 
@@ -57,6 +65,7 @@ export type MapStateToPropsType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type MapDispatchToPropsType = {
@@ -65,6 +74,7 @@ export type MapDispatchToPropsType = {
     setUsers: (users: UserType[]) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
 }
 
 type OwnPropsType = {}
@@ -76,7 +86,8 @@ export function mapStateToProps(state: ReduxRootState) {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
     }
 }
 
@@ -100,6 +111,9 @@ function mapDispatchToProps(dispatch: Dispatch) {
         },
         setTotalUsersCount: (totalCount: number) => {
             dispatch(setUsersTotalCountAC(totalCount))
+        },
+        toggleIsFetching: (isFetching: boolean) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
 
     }

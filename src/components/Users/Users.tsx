@@ -3,7 +3,8 @@ import s from "./Styles.module.css";
 import anonymous from "../../assets/images/anonymous.jpg";
 import {Button} from "@material-ui/core";
 import {MapDispatchToPropsType, MapStateToPropsType} from "./UsersContainer";
-type PropsType = MapStateToPropsType & MapDispatchToPropsType & {onPageChanged: (pageNumber: number) => void}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & { onPageChanged: (pageNumber: number) => void }
 const Users = (props: PropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
@@ -14,11 +15,12 @@ const Users = (props: PropsType) => {
         <>
             <div className={s.wrapper}>
                 {pages.map(p => {
-                    return <span
-                        onClick={() => {
-                            props.onPageChanged(p)
-                        }}
-                        className={props.currentPage! === p && `${s.page} ${s.selectedPage}` || s.page}>{p}
+
+                    return <span key={p}
+                                 onClick={() => {
+                                     props.onPageChanged(p)
+                                 }}
+                                 className={props.currentPage! === p && `${s.page} ${s.selectedPage}` || s.page}>{p}
                         </span>
                 })}
                 {props.users.map(u => <div key={u.id}>
