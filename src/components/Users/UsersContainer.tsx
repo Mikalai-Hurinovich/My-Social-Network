@@ -10,7 +10,7 @@ import {
     unfollowAC,
     UserType
 } from "../../Redux/users-reducer";
-import packman from "../../assets/images/packman.svg";
+import preloader from "../../assets/images/preloader.svg";
 import axios from "axios";
 import Users from "./Users";
 
@@ -43,7 +43,7 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <div><img src={packman}/></div> : null}
+            {this.props.isFetching ? <div><img src={preloader}/></div> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    onPageChanged={this.onPageChanged}
@@ -53,8 +53,8 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
                    unfollow={this.props.unfollow}
                    setCurrentPage={this.props.setCurrentPage}
                    setTotalUsersCount={this.props.setTotalUsersCount}
+                   isFetching={this.props.isFetching}
                    setUsers={this.props.setUsers}
-
             />
         </>
     }

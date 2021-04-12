@@ -3,8 +3,22 @@ import s from "./Styles.module.css";
 import anonymous from "../../assets/images/anonymous.jpg";
 import {Button} from "@material-ui/core";
 import {MapDispatchToPropsType, MapStateToPropsType} from "./UsersContainer";
+import {UserType} from "../../Redux/users-reducer";
 
-type PropsType = MapStateToPropsType & MapDispatchToPropsType & { onPageChanged: (pageNumber: number) => void }
+type PropsType = {
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
+    setUsers: (users: UserType[]) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
+    onPageChanged: (pageNumber: number) => void
+}
+
 const Users = (props: PropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];

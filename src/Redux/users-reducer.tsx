@@ -6,14 +6,12 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-
-
 export type UsersType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    isFetching?: boolean
+    isFetching: boolean
 }
 export type UserType = {
     id: number
