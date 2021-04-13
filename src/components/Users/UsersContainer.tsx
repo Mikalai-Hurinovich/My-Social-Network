@@ -1,16 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
 import {ReduxRootState} from "../../Redux/Redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC, toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setUsers,
+    setTotalUsersCount,
+    toggleIsFetching,
+    unfollow,
     UserType
 } from "../../Redux/users-reducer";
-import preloader from "../../assets/images/preloader.svg";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
@@ -93,34 +93,40 @@ export function mapStateToProps(state: ReduxRootState) {
 }
 
 // mapDispatchToProps передает дочерней компоненте (UsersApiComponent) через пропсы callbacks
-function mapDispatchToProps(dispatch: Dispatch) {
-    return {
-        follow: (userID: number) => {
-            // мы диспатчим не сам AC, а результат его работы, action
-            dispatch(followAC(userID))
-        },
-        unfollow: (userID: number) => {
-            // мы диспатчим не сам AC, а результат его работы, action
-            dispatch(unfollowAC(userID))
-        },
-        setUsers: (users: UserType[]) => {
-            // мы диспатчим не сам AC, а результат его работы, action
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setUsersTotalCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-
-    }
-}
+// function mapDispatchToProps(dispatch: Dispatch) {
+//     return {
+//         follow: (userID: number) => {
+//             // мы диспатчим не сам AC, а результат его работы, action
+//             dispatch(followAC(userID))
+//         },
+//         unfollow: (userID: number) => {
+//             // мы диспатчим не сам AC, а результат его работы, action
+//             dispatch(unfollowAC(userID))
+//         },
+//         setUsers: (users: UserType[]) => {
+//             // мы диспатчим не сам AC, а результат его работы, action
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage: (pageNumber: number) => {
+//             dispatch(setCurrentPageAC(pageNumber))
+//         },
+//         setTotalUsersCount: (totalCount: number) => {
+//             dispatch(setUsersTotalCountAC(totalCount))
+//         },
+//         toggleIsFetching: (isFetching: boolean) => {
+//             dispatch(toggleIsFetchingAC(isFetching))
+//         }
+//
+//     }
+// }
 
 // Создает контейнерную компоненту
-const UsersContainer =
-    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, mapDispatchToProps)(UsersApiClassComponent);
+const UsersContainer = connect(mapStateToProps, {
+    follow: follow,
+    unfollow: unfollow,
+    setUsers: setUsers,
+    setCurrentPage: setCurrentPage,
+    setTotalUsersCount: setTotalUsersCount,
+    toggleIsFetching: toggleIsFetching
+})(UsersApiClassComponent);
 export default UsersContainer;
