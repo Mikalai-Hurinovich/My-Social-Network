@@ -13,6 +13,7 @@ import {
 import preloader from "../../assets/images/preloader.svg";
 import axios from "axios";
 import Users from "./Users";
+import Preloader from "../common/Preloader/Preloader";
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -43,7 +44,7 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <div><img src={preloader}/></div> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    onPageChanged={this.onPageChanged}
