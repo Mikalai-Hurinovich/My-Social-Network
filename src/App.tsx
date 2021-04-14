@@ -22,7 +22,7 @@ const App = () => {
             <div className='app-wrapper-content'>
                 <Switch>
                     <Route exact path={'/'}/>
-                    <Route path={'/Profile'}
+                    <Route path={'/Profile/:userId?'}
                            render={() => <ProfileContainer/>}/>
                     <Route path={'/Dialogs'}
                            render={() => <DialogsContainer/>}/>

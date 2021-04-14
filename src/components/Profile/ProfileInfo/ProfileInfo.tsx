@@ -9,15 +9,12 @@ const ProfileInfo = (props: PropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
-    debugger
     return (
         <div>
             <div className={s.img}>
-                <img src='https://upload.wikimedia.org/wikipedia/commons/2/29/Dscn7471_sunset-sundog_crop_800x300.jpg'
-                     alt={'ImgIcon'}/>
             </div>
             <div className={s.description}>
-                <img src={props.profile.photos.large} alt=""/>
+                <img src={props.profile.photos.large} alt="UserPhoto"/>
                 <div>{props.profile.aboutMe}</div>
                 <div>
                     <label>My Contacts</label>
