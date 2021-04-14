@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
 import News from "./components/News/News";
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
@@ -12,6 +11,7 @@ import store from './Redux/Redux-store'
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Error404 from "./components/ErrorPage/Error404";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App = () => {
 
@@ -23,7 +23,7 @@ const App = () => {
                 <Switch>
                     <Route exact path={'/'}/>
                     <Route path={'/Profile'}
-                           render={() => <Profile/>}/>
+                           render={() => <ProfileContainer/>}/>
                     <Route path={'/Dialogs'}
                            render={() => <DialogsContainer/>}/>
                     <Route path={'/UsersApiComponent'} render={() => <UsersContainer/>}/>

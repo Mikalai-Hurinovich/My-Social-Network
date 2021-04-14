@@ -2,8 +2,8 @@ import React from 'react';
 import s from "./Styles.module.css";
 import anonymous from "../../assets/images/anonymous.jpg";
 import {Button} from "@material-ui/core";
-import {MapDispatchToPropsType, MapStateToPropsType} from "./UsersContainer";
 import {UserType} from "../../Redux/users-reducer";
+import {NavLink} from 'react-router-dom';
 
 type PropsType = {
     users: UserType[]
@@ -40,8 +40,10 @@ const Users = (props: PropsType) => {
                 {props.users.map(u => <div key={u.id}>
                     <div className={s.main}>
                         <div className={s.user}>
-                            <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : anonymous}
-                                 alt=""/>
+                            <NavLink to={`/profile/${u.id}`}>
+                                <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : anonymous}
+                                     alt=""/>
+                            </NavLink>
                             {u.followed ?
                                 <Button size={'small'} color={'primary'} variant={"contained"} onClick={() => {
                                     props.unfollow(u.id)

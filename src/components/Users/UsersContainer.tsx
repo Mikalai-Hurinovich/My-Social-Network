@@ -1,12 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {ReduxRootState} from "../../Redux/Redux-store";
-import {compose, Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
-    setUsers,
     setTotalUsersCount,
+    setUsers,
     toggleIsFetching,
     unfollow,
     UserType
@@ -19,7 +18,6 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export class UsersApiClassComponent extends React.Component<PropsType> {
     componentDidMount() {
-
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true)
             axios
@@ -78,10 +76,6 @@ export type MapDispatchToPropsType = {
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
-
-type OwnPropsType = {}
-
-
 // приниамает весь стейт приложения и возвращает только объект, с необходимыми данными
 export function mapStateToProps(state: ReduxRootState) {
     return {
