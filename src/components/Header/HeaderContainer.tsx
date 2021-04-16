@@ -9,6 +9,7 @@ type HeaderContainerType = {
     setAuthUserData: (id: number, email: string, login: string) => void
     isAuth: boolean
     login: null | string
+    email: null | string
 }
 
 class HeaderContainer extends Component<HeaderContainerType> {
@@ -33,7 +34,8 @@ class HeaderContainer extends Component<HeaderContainerType> {
 
 const mapStateToProps = (state: ReduxRootState) => ({
     isAuth: state.auth.isAuth,
-    login: state.auth.login
+    login: state.auth.login,
+    email: state.auth.email
 })
 
 
