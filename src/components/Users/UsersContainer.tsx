@@ -21,7 +21,9 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true)
             axios
-                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
+                    withCredentials: true
+                })
                 .then(response => {
                     this.props.toggleIsFetching(false)
                     this.props.setUsers(response.data.items)
@@ -34,7 +36,9 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true)
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+                withCredentials: true
+            })
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.toggleIsFetching(false)
