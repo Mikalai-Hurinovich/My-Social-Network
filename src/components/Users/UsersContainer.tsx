@@ -10,9 +10,9 @@ import {
     unfollow,
     UserType
 } from "../../Redux/users-reducer";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -20,29 +20,21 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true)
-            axios
-                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
-                    withCredentials: true
-                })
-                .then(response => {
-                    this.props.toggleIsFetching(false)
-                    this.props.setUsers(response.data.items)
-                    this.props.setTotalUsersCount(response.data.totalCount)
-                })
+            getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+                this.props.toggleIsFetching(false)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+            })
         }
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true)
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-                withCredentials: true
-            })
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.toggleIsFetching(false)
-            })
+        getUsers(pageNumber, this.props.pageSize).then(data => {
+            this.props.setUsers(data.items)
+            this.props.toggleIsFetching(false)
+        })
     }
 
     render() {
@@ -80,6 +72,7 @@ export type MapDispatchToPropsType = {
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
+
 // приниамает весь стейт приложения и возвращает только объект, с необходимыми данными
 export function mapStateToProps(state: ReduxRootState) {
     return {

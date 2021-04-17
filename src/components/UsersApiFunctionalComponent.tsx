@@ -7,6 +7,7 @@ import anonymous from "../assets/images/anonymous.jpg";
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 let UsersApiComponent = (props: PropsType) => {
+
     if (props.users.length === 0) {
         axios
             .get('https://social-network.samuraijs.com/api/1.0/users')
