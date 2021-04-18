@@ -4,7 +4,6 @@ import anonymous from "../../assets/images/anonymous.jpg";
 import {Button} from "@material-ui/core";
 import {UserType} from "../../Redux/users-reducer";
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
 import {UsersApi} from "../../api/api";
 
 type PropsType = {
