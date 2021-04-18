@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {setUserProfile} from "../../Redux/ProfileReducer";
 import {ReduxRootState} from "../../Redux/Redux-store";
 import {withRouter} from 'react-router-dom';
-import {profileLink} from "../../api/api";
+import {UsersApi} from "../../api/api";
 
 type ProfileContainerType = {
     profile: any
@@ -18,7 +18,7 @@ class ProfileContainer extends Component<ProfileContainerType> {
         if (!userId) {
             userId = 2;
         }
-        profileLink(userId).then(data => {
+        UsersApi.profileLink(userId).then(data => {
             this.props.setUserProfile(data)
         })
     }
