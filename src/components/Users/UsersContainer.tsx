@@ -5,7 +5,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingProgress,
     toggleIsFetching,
     unfollow,
     UserType
@@ -51,6 +51,8 @@ export class UsersApiClassComponent extends React.Component<PropsType> {
                    setTotalUsersCount={this.props.setTotalUsersCount}
                    isFetching={this.props.isFetching}
                    setUsers={this.props.setUsers}
+                   toggleFollowInProgress={this.props.toggleFollowInProgress}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
         </>
     }
@@ -62,6 +64,7 @@ export type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    toggleFollowInProgress: Array<number>
 }
 
 export type MapDispatchToPropsType = {
@@ -71,6 +74,7 @@ export type MapDispatchToPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 // приниамает весь стейт приложения и возвращает только объект, с необходимыми данными
@@ -81,44 +85,18 @@ export function mapStateToProps(state: ReduxRootState) {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        toggleFollowInProgress: state.usersPage.followingInProgress
     }
 }
 
-// mapDispatchToProps передает дочерней компоненте (UsersApiComponent) через пропсы callbacks
-// function mapDispatchToProps(dispatch: Dispatch) {
-//     return {
-//         follow: (userID: number) => {
-//             // мы диспатчим не сам AC, а результат его работы, action
-//             dispatch(followAC(userID))
-//         },
-//         unfollow: (userID: number) => {
-//             // мы диспатчим не сам AC, а результат его работы, action
-//             dispatch(unfollowAC(userID))
-//         },
-//         setUsers: (users: UserType[]) => {
-//             // мы диспатчим не сам AC, а результат его работы, action
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber: number) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setUsersTotalCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//
-//     }
-// }
-
 // Создает контейнерную компоненту
 const UsersContainer = connect(mapStateToProps, {
-    follow: follow,
-    unfollow: unfollow,
-    setUsers: setUsers,
-    setCurrentPage: setCurrentPage,
-    setTotalUsersCount: setTotalUsersCount,
-    toggleIsFetching: toggleIsFetching
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching,
+    toggleFollowingProgress
 })(UsersApiClassComponent);
 export default UsersContainer;

@@ -18,6 +18,8 @@ type PropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     onPageChanged: (pageNumber: number) => void
+    toggleFollowInProgress: Array<number>
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 const Users = (props: PropsType) => {
@@ -30,7 +32,6 @@ const Users = (props: PropsType) => {
         <>
             <div className={s.wrapper}>
                 {pages.map(p => {
-
                     return <span key={p}
                                  onClick={() => {
                                      props.onPageChanged(p)
@@ -46,21 +47,28 @@ const Users = (props: PropsType) => {
                                      alt=""/>
                             </NavLink>
                             {u.followed ?
-                                <Button size={'small'} color={'primary'} variant={"contained"} onClick={() => {
+                                <Button disabled={props.toggleFollowInProgress.some(id => id === u.id)} size={'small'}
+                                        color={'primary'}
+                                        variant={"contained"} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id)
                                     UsersApi.unfollowUser(u.id).then(data => {
                                         if (data.resultCode === 0) {
                                             props.unfollow(u.id);
                                         }
-
+                                        props.toggleFollowingProgress(false, u.id)
                                     });
 
 
                                 }}>Unfollow</Button> :
-                                <Button size={'small'} color={'primary'} variant={"contained"} onClick={() => {
+                                <Button disabled={props.toggleFollowInProgress.some(id => id === u.id)} size={'small'}
+                                        color={'primary'}
+                                        variant={"contained"} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id)
                                     UsersApi.followUser(u.id).then(data => {
                                         if (data.resultCode === 0) {
                                             props.follow(u.id);
                                         }
+                                        props.toggleFollowingProgress(false, u.id)
                                     });
 
                                 }}>Follow</Button>}
