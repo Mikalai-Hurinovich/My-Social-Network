@@ -107,8 +107,7 @@ let store: StoreType = {
         this._callSubscriber(this._state);
     }
 }
-// автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*> и также добавляем as const
-// каждому объекту из ф-ии, чтобы объкты воспринимались как константа
+
 
 export type ActionsTypes = DialogsActionsTypes & ProfileActionsTypes
 

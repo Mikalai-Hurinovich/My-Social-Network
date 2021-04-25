@@ -4,7 +4,6 @@ import anonymous from "../../assets/images/anonymous.jpg";
 import {Button} from "@material-ui/core";
 import {UserType} from "../../Redux/users-reducer";
 import {NavLink} from 'react-router-dom';
-import {UsersApi} from "../../api/api";
 
 type PropsType = {
     users: UserType[]
@@ -14,12 +13,9 @@ type PropsType = {
     isFetching: boolean
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    setUsers: (users: UserType[]) => void
-    setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount: (totalCount: number) => void
     onPageChanged: (pageNumber: number) => void
     toggleFollowInProgress: Array<number>
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+
 }
 
 const Users = (props: PropsType) => {
@@ -49,28 +45,14 @@ const Users = (props: PropsType) => {
                             {u.followed ?
                                 <Button disabled={props.toggleFollowInProgress.some(id => id === u.id)} size={'small'}
                                         color={'primary'}
-                                        variant={"contained"} onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id)
-                                    UsersApi.unfollowUser(u.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.unfollow(u.id);
-                                        }
-                                        props.toggleFollowingProgress(false, u.id)
-                                    });
-
-
-                                }}>Unfollow</Button> :
+                                        variant={"contained"}
+                                        onClick={() => {
+                                            props.unfollow(u.id)
+                                        }}>Unfollow</Button> :
                                 <Button disabled={props.toggleFollowInProgress.some(id => id === u.id)} size={'small'}
                                         color={'primary'}
                                         variant={"contained"} onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id)
-                                    UsersApi.followUser(u.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.follow(u.id);
-                                        }
-                                        props.toggleFollowingProgress(false, u.id)
-                                    });
-
+                                    props.follow(u.id)
                                 }}>Follow</Button>}
                         </div>
                         <div className={s.userInfo}>

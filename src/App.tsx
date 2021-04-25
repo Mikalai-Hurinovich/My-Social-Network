@@ -15,6 +15,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App = () => {
 
+
     return (
         <div className='app-wrapper'>
             <HeaderContainer/>
@@ -26,7 +27,7 @@ const App = () => {
                            render={() => <ProfileContainer/>}/>
                     <Route path={'/Dialogs'}
                            render={() => <DialogsContainer/>}/>
-                    <Route path={'/UsersApiComponent'} render={() => <UsersContainer/>}/>
+                    <Route path={'/UsersApiClassComponent'} render={() => <UsersContainer/>}/>
                     <Route path={'/Photos'} component={Photos}/>
                     <Route path={'/News'} component={News}/>
                     <Route path={'/Music'} component={Music}/>

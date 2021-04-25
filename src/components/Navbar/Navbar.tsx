@@ -16,7 +16,7 @@ const Navbar = (props: SideBarPropsType) => {
             <NavLink to={'/Dialogs'} activeClassName={s.active}>Messages</NavLink>
         </div>
         <div className={s.item}>
-            <NavLink to={'/UsersApiComponent'} activeClassName={s.active}>Users</NavLink>
+            <NavLink to={'/UsersApiClassComponent'} activeClassName={s.active}>Users</NavLink>
         </div>
         <div className={s.item}>
             <NavLink to={'/Photos'} activeClassName={s.active}>Photos</NavLink>
