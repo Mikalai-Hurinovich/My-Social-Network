@@ -1,8 +1,8 @@
 import React from "react";
+import {Dispatch} from "redux";
+import {UsersApi} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA'
-
-
 export type AuthType = {
     id: null | number,
     email: null | string,
@@ -35,11 +35,19 @@ const AuthReducer = (state: AuthType = initialState, action: ActionType): AuthTy
 
     }
 }
+export type getAuthUserDataType = () =>  void
 
 export const setAuthUserData = (id: number, email: string, login: string) => ({
     type: SET_USER_DATA,
     data: {id, login, email}
 });
-
+export const getAuthUserData: getAuthUserDataType = () => (dispatch: Dispatch) => {
+    UsersApi.authMe().then(data => {
+        if (data.resultCode === 0) {
+            let {id, login, email} = data.data
+            dispatch(setAuthUserData(id, email, login))
+        }
+    })
+}
 
 export default AuthReducer;

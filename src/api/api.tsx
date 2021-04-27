@@ -1,6 +1,6 @@
 import axios from "axios";
-// DAL - DATA ACCESS LAYER
 
+// DAL - DATA ACCESS LAYER
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
