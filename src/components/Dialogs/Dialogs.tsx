@@ -4,20 +4,14 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {Button, TextareaAutosize} from '@material-ui/core'
 import {Redirect} from 'react-router-dom';
-import {dialogsDataType, MessagesType} from "./DialogsContainer";
+import {DialogsComponentType, dialogsDataType, MessagesType} from "./DialogsContainer";
 
 export type DialogsPageType = {
     dialogs: dialogsDataType[]
     messages: Array<MessagesType>
     newMessageBody: string
 }
-type PropsType = {
-    dialogsPage: DialogsPageType
-    updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
-    isAuth: boolean
-}
-const Dialogs = (props: PropsType) => {
+const Dialogs = (props: DialogsComponentType) => {
     let state = props.dialogsPage;
     let dialogsElements = state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messageElements = state.messages.map(m => <Message key={m.id} message={m.message}/>)
