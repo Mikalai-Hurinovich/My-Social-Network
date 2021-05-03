@@ -1,6 +1,6 @@
-import {ProfilePageType} from "./Store";
 import {Dispatch} from "redux";
 import {UsersApi} from "../api/api";
+import {ProfilePageType} from "../components/Profile/Profile";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';

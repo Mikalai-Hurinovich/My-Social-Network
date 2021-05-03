@@ -1,9 +1,17 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-
+export type PostsDataType = {
+    id: number
+    message: string
+    count: number
+}
+export type ProfilePageType = {
+    posts: PostsDataType[]
+    newPostText: string
+}
 type PropsType = {
-    profile: any
+    profile: ProfilePageType
 }
 const Profile = (props: PropsType) => {
     return (

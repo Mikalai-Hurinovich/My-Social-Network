@@ -2,14 +2,20 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsPageType} from "../../Redux/Store";
 import {Button, TextareaAutosize} from '@material-ui/core'
+import {Redirect} from 'react-router-dom';
+import {dialogsDataType, MessagesType} from "./DialogsContainer";
 
-
+export type DialogsPageType = {
+    dialogs: dialogsDataType[]
+    messages: Array<MessagesType>
+    newMessageBody: string
+}
 type PropsType = {
     dialogsPage: DialogsPageType
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
+    isAuth: boolean
 }
 const Dialogs = (props: PropsType) => {
     let state = props.dialogsPage;
@@ -24,6 +30,7 @@ const Dialogs = (props: PropsType) => {
         let body = e.target.value;
         props.updateNewMessageBody(body);
     }
+    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

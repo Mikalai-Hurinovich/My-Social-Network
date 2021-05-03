@@ -2,8 +2,15 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
 import {Friends} from "../FiendsSideBar/Friends";
-import {SideBarType} from "../../Redux/Store";
 
+export type SideBarType = {
+    friends: Array<FriendsType>
+}
+export type FriendsType = {
+    id: number
+    name: string
+    img: string
+}
 type SideBarPropsType = {
     sidebar: SideBarType
 }

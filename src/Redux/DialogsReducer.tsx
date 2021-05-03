@@ -1,4 +1,4 @@
-import {DialogsPageType} from "./Store";
+import {DialogsPageType} from "../components/Dialogs/Dialogs";
 
 let initialState = {
     dialogs: [

@@ -1,4 +1,4 @@
-import {SideBarType} from "./Store";
+import {SideBarType} from "../components/Navbar/Navbar";
 
 let initialState = {
     friends: [

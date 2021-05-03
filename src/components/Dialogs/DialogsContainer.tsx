@@ -1,13 +1,25 @@
 import React from 'react';
 import {sendMessageAC, updateNewMessageBodyAC} from "../../Redux/DialogsReducer";
-import {DialogsPageType, RootStateType} from "../../Redux/Store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ReduxRootState} from "../../Redux/Redux-store";
-
+export type DialogsPageType = {
+    dialogs: dialogsDataType[]
+    messages: Array<MessagesType>
+    newMessageBody: string
+}
+export type dialogsDataType = {
+    id: number
+    name: string
+}
+export type MessagesType = {
+    id: number
+    message: string
+}
 export type MapStateToPropsType = {
     dialogsPage: DialogsPageType
+    isAuth: boolean
 }
 
 export type MapDispatchToPropsType = {
@@ -17,9 +29,10 @@ export type MapDispatchToPropsType = {
 
 export type OwnPropsType = {}
 
-let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
+let mapStateToProps = (state: ReduxRootState): MapStateToPropsType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
