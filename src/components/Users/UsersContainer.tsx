@@ -4,6 +4,7 @@ import {ReduxRootState} from "../../Redux/Redux-store";
 import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, UserType} from "../../Redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -67,12 +68,14 @@ export function mapStateToProps(state: ReduxRootState) {
 }
 
 type OwnPropsType = {}
+
 // Создает контейнерную компоненту
-const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, {
+
+const UsersContainer = withAuthRedirect(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, {
     follow,
     unfollow,
     setCurrentPage,
     toggleFollowingProgress,
     getUsers,
-})(UsersApiClassComponent);
+})(UsersApiClassComponent));
 export default UsersContainer;
