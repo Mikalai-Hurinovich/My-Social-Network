@@ -5,11 +5,12 @@ import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, Use
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export class UsersApiClassComponent extends React.Component<PropsType> {
+export class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -71,11 +72,14 @@ type OwnPropsType = {}
 
 // Создает контейнерную компоненту
 
-const UsersContainer = withAuthRedirect(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-})(UsersApiClassComponent));
-export default UsersContainer;
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, {
+            follow,
+            unfollow,
+            setCurrentPage,
+            toggleFollowingProgress,
+            getUsers,
+        }
+    )
+)(UsersContainer)
