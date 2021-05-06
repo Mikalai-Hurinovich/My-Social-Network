@@ -16,8 +16,7 @@ let reducers = combineReducers({
 });
 // автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*>
 export type ReduxRootState = ReturnType<typeof reducers>
-
-let store = createStore(reducers, applyMiddleware<any>(thunkMiddleware));
+let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 export default store;
 
 // @ts-ignore
