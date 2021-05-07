@@ -9,13 +9,14 @@ type PropsType = {
 let mapStateToPropsForRedirect = (state: ReduxRootState): PropsType => ({
     isAuth: state.auth.isAuth
 });
-export const withAuthRedirect: any = (Component: ComponentType) => {
+export const withAuthRedirect = (Component: ComponentType) => {
     class RedirectComponent extends React.Component<PropsType> {
         render() {
             if (!this.props.isAuth) return <Redirect to={'/login'}/>
             return <Component {...this.props}/>
         }
     }
+
     let ConnectedRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent);
 
     return ConnectedRedirectComponent;

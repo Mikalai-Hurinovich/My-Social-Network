@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
@@ -24,7 +24,7 @@ const Dialogs = (props: DialogsComponentType) => {
         let body = e.target.value;
         props.updateNewMessageBody(body);
     }
-    if (!props.isAuth) return <Redirect to={'/login'}/>
+        if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

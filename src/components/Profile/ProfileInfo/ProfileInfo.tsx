@@ -2,9 +2,12 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
+import {updateStatusType} from "../../../Redux/ProfileReducer";
 
 type PropsType = {
     profile: any
+    status: string
+    updateStatus: updateStatusType
 }
 
 const ProfileInfo = (props: PropsType) => {
@@ -17,12 +20,7 @@ const ProfileInfo = (props: PropsType) => {
             </div>
             <div className={s.description}>
                 <img src={props.profile.photos.large} alt="UserPhoto"/>
-                {/*<div>{props.profile.aboutMe}</div>*/}
-                <ProfileStatus status={'Hello'}/>
-                {/*<div>*/}
-                {/*    <label>My Contacts</label>*/}
-                {/*    <div>{props.profile.contacts.facebook}</div>*/}
-                {/*</div>*/}
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
 

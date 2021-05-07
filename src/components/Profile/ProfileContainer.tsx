@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 import Profile, {ProfilePageType} from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile, getUserProfileType} from "../../Redux/ProfileReducer";
+import {
+    getStatus,
+    getStatusType,
+    getUserProfile,
+    getUserProfileType,
+    updateStatus,
+    updateStatusType
+} from "../../Redux/ProfileReducer";
 import {ReduxRootState} from "../../Redux/Redux-store";
 import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
@@ -10,38 +17,45 @@ import {compose} from "redux";
 type ProfileContainerType = {
     profile: ProfilePageType
     setUserProfile: (profile: null) => void
+    getStatus: getStatusType
     match: any
     getUserProfile: getUserProfileType
     isAuth: boolean
+    status: string
+    updateStatus: updateStatusType
 }
 
 class ProfileContainer extends Component<ProfileContainerType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = 1049;
         }
         this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         );
     }
 }
 
-// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
 let mapStateToProps = (state: ReduxRootState) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    status: state.profilePage.status
 });
-
-// let WithUrlDataContainerComponent = withRouter<any, any>(AuthRedirectComponent)
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
-        getUserProfile
+        getUserProfile,
+        getStatus,
+        updateStatus
     }),
     withRouter,
     withAuthRedirect,
