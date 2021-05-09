@@ -5,14 +5,15 @@ import SideBarReducer from "./SideBarReducer";
 import usersReducer from './users-reducer';
 import AuthReducer from "./Auth-reducer";
 import thunkMiddleware from 'redux-thunk';
-
+import { reducer as formReducer } from 'redux-form'
 // наш стейт
 let reducers = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogsReducer,
     sideBar: SideBarReducer,
     usersPage: usersReducer,
-    auth: AuthReducer
+    auth: AuthReducer,
+    form: formReducer
 });
 // автоматически создать типизацию для ф-ий с пом. конструкции ReturnType<typeof *Имя ф-ии*>
 export type ReduxRootState = ReturnType<typeof reducers>
