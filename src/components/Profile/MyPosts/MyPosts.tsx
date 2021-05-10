@@ -1,11 +1,11 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {Button, TextareaAutosize, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type PropsType = {
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
+    addPost: (newPostText: string) => void
     posts: postsDataType[]
     newPostText: string
 }
@@ -15,35 +15,18 @@ type postsDataType = {
     count: number
 }
 
-
+export type addPostFormType = {
+    newPostText: string
+}
 const MyPosts = (props: PropsType) => {
     let postElements = props.posts.map(p => <Post key={p.id} message={p.message} count={p.count}/>)
-    let newPost: React.RefObject<HTMLTextAreaElement> = React.createRef()
-
-    let onAddPost = () => {
-        props.addPost();
-        // props.dispatch(addPostActionCreator())
+    const onAddPost = (formData: addPostFormType) => {
+        props.addPost(formData.newPostText)
     }
-    const onPostChange = (newText: ChangeEvent) => {
-        if (newPost.current) {
-            let textInTextarea = newPost.current.value;
-            props.updateNewPostText(textInTextarea)
-        }
-    }
-
     return (
         <div className={s.postsWrapper}>
             <Typography variant={'h4'}>My posts</Typography>
-            <div className={s.item}>
-                <div>
-                    <TextareaAutosize placeholder={'Your post message...'} rowsMin={2} onChange={onPostChange}
-                                      ref={newPost} value={props.newPostText}/>
-                </div>
-                <br/>
-                <div>
-                    <Button size={'small'} color={'primary'} variant={"contained"} onClick={onAddPost}>Add Post</Button>
-                </div>
-            </div>
+            <AddPostReduxForm onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postElements}
             </div>
@@ -52,4 +35,22 @@ const MyPosts = (props: PropsType) => {
 
 }
 
+const addNewPostForm: React.FC<InjectedFormProps<addPostFormType>> = (props: InjectedFormProps<addPostFormType>) => {
+    return (
+        <form onSubmit={props.handleSubmit} className={s.item}>
+            <div>
+                <Field component={'textarea'}
+                       name={'newPostText'}
+                       placeholder={'Your post message...'}/>
+            </div>
+            <br/>
+            <div>
+                <button>Add Post</button>
+            </div>
+        </form>
+    )
+}
+const AddPostReduxForm = reduxForm<addPostFormType>({form: 'addPost'})(addNewPostForm)
 export default MyPosts;
+
+
