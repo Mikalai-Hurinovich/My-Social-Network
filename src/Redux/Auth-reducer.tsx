@@ -48,11 +48,11 @@ const AuthReducer = (state: AuthType = initialState, action: ActionType): AuthTy
 
     }
 }
-export type getAuthUserDataType = () =>  void
+export type getAuthUserDataType = () => any
 
-export const setAuthUserData = (id: number, email: string, login: string) => ({
+export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {id, login, email}
+    data: {id, login, email, isAuth}
 });
 export const setAuthLoading = (val: boolean) => ({
     type: SET_AUTH_LOADING,
@@ -62,7 +62,21 @@ export const getAuthUserData: getAuthUserDataType = () => (dispatch: Dispatch) =
     authAPI.authMe().then(data => {
         if (data.resultCode === 0) {
             let {id, login, email} = data.data
-            dispatch(setAuthUserData(id, email, login))
+            dispatch(setAuthUserData(id, email, login, true))
+        }
+    }).finally(() => dispatch(setAuthLoading(false)))
+}
+export const login = (email: string, password: any, rememberMe: boolean) => (dispatch: Dispatch) => {
+    authAPI.login(email, password, rememberMe).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(getAuthUserData())
+        }
+    }).finally(() => dispatch(setAuthLoading(false)))
+}
+export const logout = (email: string, password: any, rememberMe: boolean) => (dispatch: Dispatch) => {
+    authAPI.logout().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false))
         }
     }).finally(() => dispatch(setAuthLoading(false)))
 }
