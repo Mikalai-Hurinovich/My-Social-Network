@@ -8,6 +8,7 @@ type HeaderType = {
     isAuth: boolean
     login: null | string
     email: string | null
+    logout: any
 }
 
 const Header = (props: HeaderType) => {
@@ -19,7 +20,11 @@ const Header = (props: HeaderType) => {
             </div>
 
             <div className={s.loginBlock}>
-                <div>{props.isAuth || props.login ? props.login : <NavLink to={'/login'}>Login</NavLink>}</div>
+                <div>{props.isAuth || props.login ?
+                    <div>
+                        {props.login} - <button onClick={props.logout}>Log Out</button>
+                    </div> :
+                    <NavLink to={'/login'}>Login</NavLink>}</div>
                 <div>{props.isAuth || props.login ? props.email : null}</div>
             </div>
         </header>

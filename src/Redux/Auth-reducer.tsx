@@ -35,7 +35,6 @@ const AuthReducer = (state: AuthType = initialState, action: ActionType): AuthTy
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         case SET_AUTH_LOADING: {
             return {
