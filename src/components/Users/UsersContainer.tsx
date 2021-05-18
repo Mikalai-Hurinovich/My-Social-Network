@@ -73,7 +73,7 @@ type OwnPropsType = {}
 // Создает контейнерную компоненту
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+    // withAuthRedirect,
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, ReduxRootState>(mapStateToProps, {
             follow,
             unfollow,
