@@ -6,9 +6,10 @@ import {connect} from "react-redux";
 import {login} from "../../Redux/Auth-reducer";
 import {Redirect} from "react-router-dom";
 import {ReduxRootState} from "../../Redux/Redux-store";
+import s from './../common/FormsControls/FormsControls.module.css'
 
 type FormDataType = {
-    login: string
+    email: string;
     password: string
     rememberMe: boolean
 }
@@ -16,7 +17,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: InjectedFor
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field validate={[required]} placeholder={'Email'} name={'login'} component={Input}/>
+                <Field validate={[required]} placeholder={'Email'} name={'email'} component={Input}/>
             </div>
             <div>
                 <Field validate={[required]} placeholder={'Password'} type={'password'} name={'password'}
@@ -25,6 +26,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: InjectedFor
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={Input}/> Remember Me
             </div>
+            {props.error && <div className={s.formSummaryError}>
+                {props.error}
+            </div>}
             <div>
                 <button>Login</button>
             </div>
@@ -41,7 +45,7 @@ const mapStateToProps = (state: ReduxRootState) => ({
 })
 const Login = (props: any) => {
     const onSubmit = (formData: FormDataType) => {
-        props.login(formData.login, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
     if (props.isAuth) return <Redirect to={'/Profile'}/>
     return (

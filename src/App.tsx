@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import News from "./components/News/News";
 import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import store, {ReduxRootState} from './Redux/Redux-store'
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Error404 from "./components/ErrorPage/Error404";
@@ -13,12 +13,18 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
+import {getAuthUserData} from "./Redux/Auth-reducer";
+import {compose} from "redux";
 
-const App = () => {
+type getAuthUserDataType = ReturnType<typeof getAuthUserData>
+const App = (props: getAuthUserDataType) => {
     const {isAuthLoading} = useSelector((state: ReduxRootState) => ({
         isAuthLoading: state.auth.loading
     }))
+    useEffect(() => {
+        props.getAuthUserData();
+    }, [])
 
     return (
         <div className='app-wrapper'>
@@ -45,4 +51,5 @@ const App = () => {
     );
 }
 
-export default App;
+export default compose<React.ComponentType>(withRouter,
+    connect(null, {getAuthUserData}))(App);

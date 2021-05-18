@@ -13,9 +13,7 @@ type HeaderContainerType = {
 }
 
 class HeaderContainer extends Component<HeaderContainerType> {
-    componentDidMount() {
-        this.props.getAuthUserData();
-    }
+
 
     render() {
         return <Header {...this.props}/>
