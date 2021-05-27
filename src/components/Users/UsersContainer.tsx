@@ -15,9 +15,10 @@ import {compose} from "redux";
 import {
     getCurrentPage,
     getIsFetching,
-    getPageSize, getToggleFollowInProgress,
+    getPageSize,
+    getToggleFollowInProgress,
     getTotalUsersCount,
-    getUsers
+    getUsersReselect
 } from "../../Redux/users-selectors";
 
 
@@ -72,7 +73,7 @@ export type MapDispatchToPropsType = {
 // приниамает весь стейт приложения и возвращает только объект, с необходимыми данными
 export function mapStateToProps(state: ReduxRootState) {
     return {
-        users: getUsers(state),
+        users: getUsersReselect(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),

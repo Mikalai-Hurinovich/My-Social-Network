@@ -19,20 +19,16 @@ let initialState = {
 
 }
 
-export type DialogsActionsTypes = SendMessageActionType
-
-
-const DialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsTypes): DialogsPageType => {
-    let stateCopy = JSON.parse(JSON.stringify(state));
+const DialogsReducer = (state: DialogsPageType = initialState, action: SendMessageActionType): DialogsPageType => {
     switch (action.type) {
         case 'SEND-MESSAGE':
             let body = action.newMessageBody;
-            return stateCopy = {
-                ...stateCopy,
-                messages: [...stateCopy.messages, {id: 6, message: body}] // вместо метода push использ. spread
+            return {
+                ...state,
+                messages: [...state.messages, {id: 6, message: body}] // вместо метода push использ. spread
             }
         default:
-            return stateCopy;
+            return state;
     }
 }
 
