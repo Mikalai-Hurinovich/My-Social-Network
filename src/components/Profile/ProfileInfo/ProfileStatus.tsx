@@ -11,7 +11,8 @@ const ProfileStatus = (props: ProfileStatusType) => {
     const [status, setStatus] = useState(props.status);
     useEffect(() => {
         setStatus(props.status)
-    }, [])
+    }, [props.status])
+
     const activateEditMode = () => setEditMode(true)
     const deactivateEditMode = () => {
         setEditMode(false)
@@ -21,42 +22,6 @@ const ProfileStatus = (props: ProfileStatusType) => {
         e.key === 'Enter' ? deactivateEditMode() : null;
     }
     const onStatusChange = (e: React.FormEvent<HTMLInputElement>) => setStatus(e.currentTarget.value)
-    // state = {
-    //     editMode: false,
-    //     status: this.props.status
-    // }
-    //
-    // activateEditMode = () => {
-    //     // setState - асинхронная функция
-    //     this.setState({
-    //         editMode: true
-    //     })
-    // }
-    //
-    // deactivateEditMode = () => {
-    //     // setState - асинхронная функция
-    //     this.setState({
-    //         editMode: false
-    //     })
-    //     this.props.updateStatus(this.state.status);
-    // }
-    // onStatusChange = (e: React.FormEvent<HTMLInputElement>) => {
-    //     this.setState({
-    //         status: e.currentTarget.value
-    //     });
-    // }
-    // onChangeStatusWithEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    //     e.key === 'Enter' ? this.deactivateEditMode() : null;
-    //
-    // }
-    //
-    // componentDidUpdate(prevProps: ProfileStatusType, prevState: ProfileStatusType) {
-    //     if (prevProps.status !== this.props.status) {
-    //         this.setState({
-    //             status: this.props.status
-    //         })
-    //     }
-    // }
     return <>
         {!editMode
             ?
