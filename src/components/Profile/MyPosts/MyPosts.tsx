@@ -20,8 +20,8 @@ type postsDataType = {
 export type addPostFormType = {
     newPostText: string
 }
-const MyPosts = (props: PropsType) => {
-    console.log('myposts')
+const MyPosts = React.memo((props: PropsType) => {
+    console.log('RENDER')
     let postElements = props.posts.map(p => <Post key={p.id} message={p.message} count={p.count}/>)
     const onAddPost = (formData: addPostFormType) => {
         props.addPost(formData.newPostText)
@@ -35,7 +35,9 @@ const MyPosts = (props: PropsType) => {
             </div>
         </div>
     )
-}
+}, (prevProps, nextProps) => {
+    return prevProps.posts.length === nextProps.posts.length
+})
 const maxLength10 = maxLengthCreator(10)
 const addNewPostForm: React.FC<InjectedFormProps<addPostFormType>> = (props: InjectedFormProps<addPostFormType>) => {
     return (
@@ -54,6 +56,7 @@ const addNewPostForm: React.FC<InjectedFormProps<addPostFormType>> = (props: Inj
     )
 }
 const AddPostReduxForm = reduxForm<addPostFormType>({form: 'addPost'})(addNewPostForm)
-export default React.memo(MyPosts);
+
+export default MyPosts;
 
 
