@@ -5,6 +5,7 @@ import {ProfilePageType} from "../components/Profile/Profile";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
     posts: [
@@ -22,14 +23,18 @@ export type AddPostActionType = {
     type: 'ADD-POST',
     newPostText: string
 }
+export type DeletePostActionType = {
+    type: 'DELETE_POST',
+    postId: number
+}
 export type SetStatusType = {
     type: typeof SET_STATUS
     status: string
 }
 
-export type ProfileActionsTypes =  AddPostActionType | SetUserProfileType | SetStatusType
+export type ProfileActionsTypes = AddPostActionType | SetUserProfileType | SetStatusType | DeletePostActionType
 
-const ProfileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes) => {
+export const ProfileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes) => {
     const stateCopy = JSON.parse(JSON.stringify(state))
     switch (action.type) {
         case ADD_POST:
@@ -41,6 +46,8 @@ const ProfileReducer = (state: ProfilePageType = initialState, action: ProfileAc
             return {...state, profile: action.profile}
         case SET_STATUS:
             return {...state, status: action.status}
+        case "DELETE_POST":
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         default:
             return stateCopy;
     }
@@ -73,4 +80,5 @@ export const updateStatus = (status: string) => (dispatch: Dispatch) => {
 export const setUserProfile = (profile: null): SetUserProfileType => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status});
 export const addPostActionCreator = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText})
+export const deletePostAC = (postId: number): DeletePostActionType => ({type: DELETE_POST, postId})
 export default ProfileReducer;
