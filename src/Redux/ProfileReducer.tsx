@@ -60,25 +60,25 @@ export type getUserProfileType = (userId: number) => (dispatch: Dispatch) => voi
 // Thunks
 export const getUserProfile: getUserProfileType = (userId: number) => (dispatch: Dispatch) => {
     UsersApi.profileLink(userId).then(data => {
-        dispatch(setUserProfile(data))
+        dispatch(setUserProfileAC(data))
     })
 }
 export const getStatus: getStatusType = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId).then(data => {
-        dispatch(setStatus(data))
+        dispatch(setStatusAC(data))
     })
 }
 export const updateStatus = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(status)
         .then(data => {
             if (data.resultCode === 0) {
-                dispatch(setStatus(status))
+                dispatch(setStatusAC(status))
             }
         })
 }
 // AC
-export const setUserProfile = (profile: null): SetUserProfileType => ({type: SET_USER_PROFILE, profile});
-export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status});
-export const addPostActionCreator = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText})
+export const setUserProfileAC = (profile: null): SetUserProfileType => ({type: SET_USER_PROFILE, profile});
+export const setStatusAC = (status: string): SetStatusType => ({type: SET_STATUS, status});
+export const addPostAC = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText})
 export const deletePostAC = (postId: number): DeletePostActionType => ({type: DELETE_POST, postId})
 export default ProfileReducer;
