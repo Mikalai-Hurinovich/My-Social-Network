@@ -11,7 +11,6 @@ import {
 } from "../../Redux/ProfileReducer";
 import {ReduxRootState} from "../../Redux/Redux-store";
 import {withRouter} from 'react-router-dom';
-import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {compose} from "redux";
 
 type ProfileContainerType = {

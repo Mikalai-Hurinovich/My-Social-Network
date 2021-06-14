@@ -32,7 +32,7 @@ const App = (props: getAuthUserDataType) => {
             <Navbar sidebar={store.getState().sideBar}/>
             {!isAuthLoading && <div className='app-wrapper-content'>
                 <Switch>
-                    <Route exact path={'/'}/>
+                    <Route exact path={'/'} component={Login}/>
                     <Route path={'/Profile/:userId?'}
                            render={() => <ProfileContainer/>}/>
                     <Route path={'/Dialogs'}
