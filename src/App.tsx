@@ -32,7 +32,7 @@ const App = (props: getAuthUserDataType) => {
             <Navbar sidebar={store.getState().sideBar}/>
             {!isAuthLoading && <div className='app-wrapper-content'>
                 <Switch>
-                    <Route exact path={'/'} component={Login}/>
+                    <Route exact path={'/'} render={() => <ProfileContainer/>}/>
                     <Route path={'/Profile/:userId?'}
                            render={() => <ProfileContainer/>}/>
                     <Route path={'/Dialogs'}
@@ -42,7 +42,7 @@ const App = (props: getAuthUserDataType) => {
                     <Route path={'/News'} component={News}/>
                     <Route path={'/Music'} component={Music}/>
                     <Route path={'/Settings'} component={Settings}/>
-                    <Route path={'/Login'} component={Login}/>
+                    <Route path={'*'} component={Login}/>
                     <Route render={() => <Error404/>}/>
                 </Switch>
             </div>}
