@@ -1,15 +1,15 @@
 {
-  "main.css": "/My-Social-Network/static/css/main.bfded48c.chunk.css",
-  "main.js": "/My-Social-Network/static/js/main.75c64b13.chunk.js",
-  "main.js.map": "/My-Social-Network/static/js/main.75c64b13.chunk.js.map",
-  "static/js/1.ddd1a35d.chunk.js": "/My-Social-Network/static/js/1.ddd1a35d.chunk.js",
-  "static/js/1.ddd1a35d.chunk.js.map": "/My-Social-Network/static/js/1.ddd1a35d.chunk.js.map",
-  "runtime~main.js": "/My-Social-Network/static/js/runtime~main.a1df9802.js",
-  "runtime~main.js.map": "/My-Social-Network/static/js/runtime~main.a1df9802.js.map",
-  "static/media/anonymous.jpg": "/My-Social-Network/static/media/anonymous.591d2cd5.jpg",
-  "static/media/preloader.svg": "/My-Social-Network/static/media/preloader.962f67ed.svg",
-  "static/css/main.bfded48c.chunk.css.map": "/My-Social-Network/static/css/main.bfded48c.chunk.css.map",
-  "index.html": "/My-Social-Network/index.html",
-  "precache-manifest.e64bf9f82851799412225ff422f05d46.js": "/My-Social-Network/precache-manifest.e64bf9f82851799412225ff422f05d46.js",
-  "service-worker.js": "/My-Social-Network/service-worker.js"
+  "main.css": "/My-Social-Network/Profile/static/css/main.bfded48c.chunk.css",
+  "main.js": "/My-Social-Network/Profile/static/js/main.75c64b13.chunk.js",
+  "main.js.map": "/My-Social-Network/Profile/static/js/main.75c64b13.chunk.js.map",
+  "static/js/1.ddd1a35d.chunk.js": "/My-Social-Network/Profile/static/js/1.ddd1a35d.chunk.js",
+  "static/js/1.ddd1a35d.chunk.js.map": "/My-Social-Network/Profile/static/js/1.ddd1a35d.chunk.js.map",
+  "runtime~main.js": "/My-Social-Network/Profile/static/js/runtime~main.96d1bcad.js",
+  "runtime~main.js.map": "/My-Social-Network/Profile/static/js/runtime~main.96d1bcad.js.map",
+  "static/media/anonymous.jpg": "/My-Social-Network/Profile/static/media/anonymous.591d2cd5.jpg",
+  "static/media/preloader.svg": "/My-Social-Network/Profile/static/media/preloader.962f67ed.svg",
+  "static/css/main.bfded48c.chunk.css.map": "/My-Social-Network/Profile/static/css/main.bfded48c.chunk.css.map",
+  "index.html": "/My-Social-Network/Profile/index.html",
+  "precache-manifest.b55bd3b9e72331b587f8cfd91baea0b5.js": "/My-Social-Network/Profile/precache-manifest.b55bd3b9e72331b587f8cfd91baea0b5.js",
+  "service-worker.js": "/My-Social-Network/Profile/service-worker.js"
 }
