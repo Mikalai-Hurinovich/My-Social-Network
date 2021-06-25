@@ -8,8 +8,8 @@ import {
     getUserProfileType,
     updateStatus,
     updateStatusType
-} from "../../Redux/ProfileReducer";
-import {ReduxRootState} from "../../Redux/Redux-store";
+} from "../../Redux/profile-reducer";
+import {ReduxRootState} from "../../Redux/redux-store";
 import {withRouter} from 'react-router-dom';
 import {compose} from "redux";
 

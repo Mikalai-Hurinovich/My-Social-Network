@@ -1,6 +1,6 @@
 import React, {Component, ComponentType} from 'react';
 import {Redirect} from "react-router-dom";
-import {ReduxRootState} from "../Redux/Redux-store";
+import {ReduxRootState} from "../Redux/redux-store";
 import {connect} from "react-redux";
 
 type PropsType = {
@@ -18,10 +18,7 @@ export const withAuthRedirect = (Component: ComponentType) => {
         }
     }
 
-
-    let ConnectedRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent);
-
-    return ConnectedRedirectComponent;
+    return connect(mapStateToPropsForRedirect)(RedirectComponent);
 }
 
 

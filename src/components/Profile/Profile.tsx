@@ -1,7 +1,7 @@
 import React from 'react';
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {updateStatusType} from "../../Redux/ProfileReducer";
+import {updateStatusType} from "../../Redux/profile-reducer";
 
 export type PostsDataType = {
     id: number

@@ -1,8 +1,8 @@
 import React from 'react';
-import {addPostAC} from "../../../Redux/ProfileReducer";
+import {addPostAC} from "../../../Redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {ReduxRootState} from "../../../Redux/Redux-store";
+import {ReduxRootState} from "../../../Redux/redux-store";
 import {Dispatch} from "redux";
 
 type postsDataType = {

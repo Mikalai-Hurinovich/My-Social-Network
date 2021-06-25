@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ReduxRootState} from "../../Redux/Redux-store";
+import {ReduxRootState} from "../../Redux/redux-store";
 import {
     follow,
     requestUsers,

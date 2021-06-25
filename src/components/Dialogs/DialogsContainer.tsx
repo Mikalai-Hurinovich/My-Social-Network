@@ -1,9 +1,9 @@
 import React from 'react';
-import {sendMessageAC} from "../../Redux/DialogsReducer";
+import {sendMessageAC} from "../../Redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
-import {ReduxRootState} from "../../Redux/Redux-store";
+import {ReduxRootState} from "../../Redux/redux-store";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 
 export type DialogsPageType = {

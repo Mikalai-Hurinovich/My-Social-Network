@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
-import ProfileReducer from "./ProfileReducer";
-import DialogsReducer from "./DialogsReducer";
-import SideBarReducer from "./SideBarReducer";
+import ProfileReducer from "./profile-reducer";
+import DialogsReducer from "./dialogs-reducer";
+import SideBarReducer from "./sidebar-reducer";
 import usersReducer from './users-reducer';
-import AuthReducer from "./Auth-reducer";
+import AuthReducer from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 // наш стейт

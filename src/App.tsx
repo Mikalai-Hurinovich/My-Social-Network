@@ -6,7 +6,7 @@ import Settings from './components/Settings/Settings';
 import Music from "./components/Music/Music";
 import Photos from './components/Photos/Photos';
 import {Route, Switch, withRouter} from 'react-router-dom';
-import store, {ReduxRootState} from './Redux/Redux-store'
+import store, {ReduxRootState} from './Redux/redux-store'
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Error404 from "./components/ErrorPage/Error404";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -14,7 +14,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, useSelector} from "react-redux";
-import {getAuthUserData} from "./Redux/Auth-reducer";
+import {getAuthUserData} from "./Redux/auth-reducer";
 import {compose} from "redux";
 
 type getAuthUserDataType = ReturnType<typeof getAuthUserData>
