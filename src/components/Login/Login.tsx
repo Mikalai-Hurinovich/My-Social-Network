@@ -1,6 +1,6 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {createFormField, Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../Utils/Validators/Validators";
 import {connect} from "react-redux";
 import {login} from "../../Redux/auth-reducer";
@@ -16,16 +16,20 @@ type FormDataType = {
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field validate={[required]} placeholder={'Email'} name={'email'} component={Input}/>
-            </div>
-            <div>
-                <Field validate={[required]} placeholder={'Password'} type={'password'} name={'password'}
-                       component={Input}/>
-            </div>
-            <div>
-                <Field type={'checkbox'} name={'rememberMe'} component={Input}/> Remember Me
-            </div>
+            {createFormField('Email', 'email', Input, [required])}
+            {createFormField('Password', 'password', Input, [required], {type: 'password'})}
+            {createFormField(null, 'rememberMe', Input, [], {type: 'checkbox'}, 'Remember Me')}
+            {/*<div>*/}
+            {/*   */}
+            {/*    <Field validate={[required]} placeholder={'Email'} name={'email'} component={Input}/>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <Field validate={[required]} placeholder={'Password'} type={'password'} name={'password'}*/}
+            {/*           component={Input}/>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <Field type={'checkbox'} name={'rememberMe'} component={Input}/> Remember Me*/}
+            {/*</div>*/}
             {props.error && <div className={s.formSummaryError}>
                 {props.error}
             </div>}

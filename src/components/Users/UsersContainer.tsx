@@ -46,7 +46,6 @@ export class UsersContainer extends React.Component<PropsType> {
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   isFetching={this.props.isFetching}
                    toggleFollowInProgress={this.props.toggleFollowInProgress}
             />
         </>
